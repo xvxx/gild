@@ -4,7 +4,7 @@
 # for programmers. The client is very simple.
 #
 ## TODO
-# [ ] Connect to server and print response
+# [x] Connect to server and print response (bad: depends on nc)
 # [ ] Display dir contents in technicolor
 # [ ] Pipe file contents to less
 # [ ] Prompt-based navigation (show link #s and ask what to do)
@@ -12,5 +12,30 @@
 # [ ] Download file to pwd
 # [ ] Are we missing anything?
 
+DATA:
+gopher/host is text
+gopher/port is text
+gopher/response is text
+command is text
+
 PROCEDURE:
-    display "Hi there." crlf
+sub-procedure gopher-get
+    store "echo '\\\\r' | nc " in command
+    join command and gopher/host in command
+    join command and " " in command
+    join command and gopher/port in command
+    execute command and store output in gopher/response
+end sub-procedure
+
+# main
+store argv:0 in gopher/host
+store argv:1 in gopher/port
+if argv:0 is equal to "" then
+    store "localhost" in gopher/host
+end if
+if argv:1 is equal to "" then
+    store "6969" in gopher/port
+end if
+
+call sub-procedure gopher-get
+display gopher/response crlf
