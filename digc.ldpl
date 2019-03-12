@@ -28,6 +28,11 @@ sub-procedure gopher-get
 end sub-procedure
 
 # main
+if argc is equal to 0 then
+    display "Usage: digc hostname [port]" crlf
+    exit
+end if
+
 store argv:0 in gopher/host
 store argv:1 in gopher/port
 if argv:0 is equal to "" then
