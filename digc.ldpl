@@ -1,2 +1,16 @@
+# dvkt's inconceivable gopher client
+#
+# digc is a command line gopher client written in LDPL, a language
+# for programmers. The client is very simple.
+#
+## TODO
+# [ ] Connect to server and print response
+# [ ] Display dir contents in technicolor
+# [ ] Pipe file contents to less
+# [ ] Prompt-based navigation (show link #s and ask what to do)
+# [ ] Search
+# [ ] Download file to pwd
+# [ ] Are we missing anything?
+
 PROCEDURE:
-    display "Hi there."
+    display "Hi there." crlf
