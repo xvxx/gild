@@ -9,18 +9,73 @@
 # [ ] Pipe file contents to less
 # [ ] Prompt-based navigation (show link #s and ask what to do)
 # [ ] Search
-# [ ] Download file to pwd
+# [ ] Download file to pwd 
 # [ ] Are we missing anything?
 
 DATA:
+
 gopher/host is text
 gopher/port is text
 gopher/response is text
+
 command is text
+index is number
+length is number
+line is text
+char is text
+c is text
+i is number
+len is number
+buf is text
+
+colormap is text vector 
 
 PROCEDURE:
+
+sub-procedure gopher-print
+    store "\e[32m" in colormap:"0" # file
+    store "\e[34m" in colormap:"1" # dir
+    store "\e[33m" in colormap:"i" # info
+    store "\e[31m" in colormap:"3" # err
+    store "\e[36m" in colormap:"h" # html
+    store "\e[37m" in colormap:0   # nada
+
+    store length of gopher/response in length
+    while index is less than length do
+        get character at index from gopher/response in char
+        if char is equal to "\r" then
+            add 1 and index in index
+            get character at index from gopher/response in char
+            if char is equal to "\n" then
+                get character at 0 from line in char  
+                store colormap:char in char 
+                if char is equal to "" then 
+                    store colormap:0 in char 
+                end if
+                display char "    "
+                store 1 in i 
+                store length of line in len
+                store "" in buf
+                while i is less than len do 
+                    get character at i from line in char
+                    if char is equal to "\t" then 
+                        break
+                    end if
+                    join buf and char in buf
+                    add 1 and i in i
+                repeat
+                display buf crlf
+                store "" in line
+            end if
+        else
+            join line and char in line
+        end if
+        add 1 and index in index
+    repeat
+end sub-procedure
+
 sub-procedure gopher-get
-    store "echo '\\\\r' | nc " in command
+    store "echo \"\r\" | nc " in command
     join command and gopher/host in command
     join command and " " in command
     join command and gopher/port in command
@@ -41,4 +96,4 @@ if argv:1 is equal to "" then
 end if
 
 call sub-procedure gopher-get
-display gopher/response crlf
+call sub-procedure gopher-print
