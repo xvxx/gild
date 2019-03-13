@@ -16,6 +16,7 @@ DATA:
 
 gopher/host is text
 gopher/port is text
+gopher/selector is text
 gopher/response is text
 
 command is text
@@ -74,7 +75,12 @@ sub-procedure gopher-print
 end sub-procedure
 
 sub-procedure gopher-get
-    store "echo \"\r\" | nc " in command
+    if gopher/selector is equal to "" then
+        store "echo \"\r\" | nc " in command
+    else
+        join "echo \"" and gopher/selector in command
+        join command and "\r\" | nc " in command
+    end if
     join command and gopher/host in command
     join command and " " in command
     join command and gopher/port in command
@@ -83,12 +89,13 @@ end sub-procedure
 
 # main
 if argc is equal to 0 then
-    display "Usage: digc hostname [port]" crlf
+    display "Usage: digc hostname [port] [selector]" crlf
     exit
 end if
 
 store argv:0 in gopher/host
 store argv:1 in gopher/port
+store argv:2 in gopher/selector
 
 if argv:1 is equal to "" then
     store "70" in gopher/port
