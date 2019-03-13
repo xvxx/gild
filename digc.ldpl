@@ -35,11 +35,9 @@ end if
 
 store argv:0 in gopher/host
 store argv:1 in gopher/port
-if argv:0 is equal to "" then
-    store "localhost" in gopher/host
-end if
+
 if argv:1 is equal to "" then
-    store "6969" in gopher/port
+    store "70" in gopher/port
 end if
 
 call sub-procedure gopher-get
