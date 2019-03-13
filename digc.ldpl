@@ -5,7 +5,7 @@
 #
 ## TODO
 # [x] Connect to server and print response (bad: depends on nc)
-# [ ] Display dir contents in technicolor
+# [x] Display dir contents in technicolor
 # [ ] Pipe file contents to less
 # [ ] Prompt-based navigation (show link #s and ask what to do)
 # [ ] Search
