@@ -23,7 +23,6 @@ index is number
 length is number
 line is text
 char is text
-c is text
 i is number
 len is number
 buf is text
