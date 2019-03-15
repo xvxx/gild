@@ -4,4 +4,4 @@ build: digc.ldpl
 	ldpl digc.ldpl
 
 run: build
-	./digc-bin
+	./digc-bin localhost 6969
