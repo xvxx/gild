@@ -30,15 +30,14 @@ buf is text
 colormap is text vector 
 
 PROCEDURE:
+store "\e[32m" in colormap:"0" # file
+store "\e[34m" in colormap:"1" # dir
+store "\e[33m" in colormap:"i" # info
+store "\e[31m" in colormap:"3" # err
+store "\e[36m" in colormap:"h" # html
+store "\e[37m" in colormap:0   # nada
 
 sub-procedure gopher-print
-    store "\e[32m" in colormap:"0" # file
-    store "\e[34m" in colormap:"1" # dir
-    store "\e[33m" in colormap:"i" # info
-    store "\e[31m" in colormap:"3" # err
-    store "\e[36m" in colormap:"h" # html
-    store "\e[37m" in colormap:0   # nada
-
     get character at index from gopher/response in char
     while char is not equal to "" do 
         if char is equal to "\r" then
