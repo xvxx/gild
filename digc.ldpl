@@ -19,6 +19,9 @@ gopher/port is text
 gopher/selector is text
 gopher/response is text
 
+gopher/links is text vector
+
+input is number
 command is text
 index is number
 line is text
@@ -27,7 +30,10 @@ i is number
 len is number
 buf is text
 
-colormap is text vector 
+colormap is text vector
+linktypes is number vector
+
+link-num is number
 
 PROCEDURE:
 store "\e[32m" in colormap:"0" # file
@@ -36,6 +42,11 @@ store "\e[33m" in colormap:"i" # info
 store "\e[31m" in colormap:"3" # err
 store "\e[36m" in colormap:"h" # html
 store "\e[37m" in colormap:0   # nada
+store "\e[35m" in colormap:"L" # link
+
+store 1 in linktypes:"0" # file
+store 1 in linktypes:"1" # dir
+
 
 sub-procedure gopher-print
     get character at index from gopher/response in char
@@ -45,11 +56,23 @@ sub-procedure gopher-print
             get character at index from gopher/response in char
             if char is equal to "\n" then
                 get character at 0 from line in char  
+                if linktypes:char is equal to 1 then 
+                    display colormap:"L" "   "
+                    add 1 and link-num in link-num
+                    if link-num is less than 10 then 
+                        display "0" link-num 
+                    else 
+                        display link-num 
+                    end if 
+                    display ". "
+                else
+                    display "       "
+                end if 
                 store colormap:char in char 
                 if char is equal to "" then 
                     store colormap:0 in char 
                 end if
-                display char "    "
+                display char
                 store 1 in i 
                 store length of line in len
                 store "" in buf
@@ -85,6 +108,15 @@ sub-procedure gopher-get
     execute command and store output in gopher/response
 end sub-procedure
 
+sub-procedure gopher-prompt
+    display "Enter #: "
+    accept input
+    display "? "
+    display input crlf
+    exit
+end sub-procedure
+
+
 # main
 if argc is equal to 0 then
     display "Usage: digc hostname [port] [selector]" crlf
@@ -99,5 +131,8 @@ if argv:1 is equal to "" then
     store "70" in gopher/port
 end if
 
-call sub-procedure gopher-get
-call sub-procedure gopher-print
+while 1 is greater than 0 do
+    call sub-procedure gopher-get
+    call sub-procedure gopher-print
+    call sub-procedure gopher-prompt
+repeat
