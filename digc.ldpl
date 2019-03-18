@@ -21,7 +21,6 @@ gopher/response is text
 
 command is text
 index is number
-length is number
 line is text
 char is text
 i is number
@@ -40,9 +39,8 @@ sub-procedure gopher-print
     store "\e[36m" in colormap:"h" # html
     store "\e[37m" in colormap:0   # nada
 
-    store length of gopher/response in length
-    while index is less than length do
-        get character at index from gopher/response in char
+    get character at index from gopher/response in char
+    while char is not equal to "" do 
         if char is equal to "\r" then
             add 1 and index in index
             get character at index from gopher/response in char
@@ -71,6 +69,7 @@ sub-procedure gopher-print
             join line and char in line
         end if
         add 1 and index in index
+        get character at index from gopher/response in char
     repeat
 end sub-procedure
 
