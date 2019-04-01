@@ -1,7 +1,7 @@
 default: run
 
-build: digc.ldpl
-	ldpl digc.ldpl
+build: gold.lsc
+	ldpl gold.lsc
 
 run: build
 	./digc-bin localhost 6969

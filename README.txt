@@ -1,6 +1,8 @@
-* dvkt's {imprecise, incomplete, indefinite} gopher client
+* GOLD: A Gopher client in LDPL 
 
-To use it, first install LDPL from https://ldpl.lartu.net/
+To use it, first install the LDPL programming language:
+
+https://ldpl.lartu.net/
 
 Then:
 
@@ -9,4 +11,4 @@ Then:
 
 Or, after `make build`:
 
-    $ ./digc-bin gopher.black
+    $ ./gold-bin gopher.black
