@@ -14,13 +14,16 @@
 
 DATA:
 
-gopher/host is text
-gopher/port is text
-gopher/selector is text
-gopher/response is text
+# gopher config
+gopher.host is text
+gopher.port is text
+gopher.selector is text
+gopher.response is text
 
-gopher/links is text vector
+# page navigation
+gopher.links is text vector
 
+# generic locals
 input is number
 command is text
 index is number
@@ -49,11 +52,11 @@ store 1 in linktypes:"1" # dir
 
 
 sub-procedure gopher-print
-    get character at index from gopher/response in char
+    get character at index from gopher.response in char
     while char is not equal to "" do 
         if char is equal to "\r" then
             add 1 and index in index
-            get character at index from gopher/response in char
+            get character at index from gopher.response in char
             if char is equal to "\n" then
                 get character at 0 from line in char  
                 if linktypes:char is equal to 1 then 
@@ -91,21 +94,21 @@ sub-procedure gopher-print
             join line and char in line
         end if
         add 1 and index in index
-        get character at index from gopher/response in char
+        get character at index from gopher.response in char
     repeat
 end sub-procedure
 
 sub-procedure gopher-get
-    if gopher/selector is equal to "" then
+    if gopher.selector is equal to "" then
         store "echo \"\r\" | nc " in command
     else
-        join "echo \"" and gopher/selector in command
+        join "echo \"" and gopher.selector in command
         join command and "\r\" | nc " in command
     end if
-    join command and gopher/host in command
+    join command and gopher.host in command
     join command and " " in command
-    join command and gopher/port in command
-    execute command and store output in gopher/response
+    join command and gopher.port in command
+    execute command and store output in gopher.response
 end sub-procedure
 
 sub-procedure gopher-prompt
@@ -123,12 +126,12 @@ if argc is equal to 0 then
     exit
 end if
 
-store argv:0 in gopher/host
-store argv:1 in gopher/port
-store argv:2 in gopher/selector
+store argv:0 in gopher.host
+store argv:1 in gopher.port
+store argv:2 in gopher.selector
 
 if argv:1 is equal to "" then
-    store "70" in gopher/port
+    store "70" in gopher.port
 end if
 
 while 1 is greater than 0 do
