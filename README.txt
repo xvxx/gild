@@ -31,9 +31,9 @@ Usage
 
 3. Now visit your favorite gopher server!
 
-    $ ./gild-bin gopher.black
-    $ ./gild-bin sdf.org 70
-    $ ./gild-bin hngopher.com 70 /live/p1/
+    $ ./gild gopher.black
+    $ ./gild sdf.org 70
+    $ ./gild hngopher.com 70 /live/p1/
 
 TODO 
 ~~~~

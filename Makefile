@@ -1,7 +1,7 @@
 default: run
 
-build: gold.lsc
-	ldpl gold.lsc
+build: gild.lsc
+	ldpl -o=gild gild.lsc
 
 run: build
-	./digc-bin localhost 6969
+	./gild localhost 6969
