@@ -22,14 +22,16 @@ gopher.response is text
 gopher.links is text vector
 
 # generic locals
+index is number
 input is number
 command is text
-index is number
 line is text
 char is text
 i is number
 len is number
 buf is text
+tabs is number
+type is text
 
 colormap is text vector
 linktypes is number vector
@@ -48,8 +50,13 @@ store "\e[35m" in colormap:"L" # link
 store 1 in linktypes:"0" # file
 store 1 in linktypes:"1" # dir
 
-
 sub-procedure gopher-print
+    store 0 in index
+    store "" in char
+    store "" in line
+    store "" in buf
+    store 0 in link-num
+
     get character at index from gopher.response in char
     while char is not equal to "" do 
         if char is equal to "\r" then
@@ -66,6 +73,7 @@ sub-procedure gopher-print
                         display link-num 
                     end if 
                     display ". "
+                    store line in gopher.links:link-num
                 else
                     display "       "
                 end if 
@@ -109,14 +117,39 @@ sub-procedure gopher-get
     execute command and store output in gopher.response
 end sub-procedure
 
+sub-procedure gopher-parse-link
+    store 1 in i 
+    store 0 in tabs
+    store "" in buf 
+    store length of gopher.links:input in len
+    get character at 0 from gopher.links:input in type
+    
+    while i is less than len do 
+        get character at i from gopher.links:input in char
+        add 1 and i in i
+        if char is equal to "\t" then
+            add 1 and tabs in tabs
+            if tabs is equal to 2 then 
+                store buf in gopher.selector
+            end if 
+            if tabs is equal to 3 then 
+                store buf in gopher.host
+            end if 
+            store "" in buf 
+        else 
+            join buf and char in buf 
+        end if 
+    repeat 
+
+    store buf in gopher.port
+end sub-procedure
+
 sub-procedure gopher-prompt
     display "Enter #: "
     accept input
-    display "? "
-    display input crlf
-    exit
+    display gopher.links:input crlf
+    call sub-procedure gopher-parse-link
 end sub-procedure
-
 
 # main
 if argc is equal to 0 then
