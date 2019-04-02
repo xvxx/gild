@@ -1,4 +1,4 @@
-* GOLD: A Gopher client in LDPL 
+* GILD: Gopher client in LDPL
 
 To use it, first install the LDPL programming language:
 
@@ -11,4 +11,4 @@ Then:
 
 Or, after `make build`:
 
-    $ ./gold-bin gopher.black
+    $ ./gild-bin gopher.black

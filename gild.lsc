@@ -1,7 +1,5 @@
-# dvkt's inconceivable gopher client
-#
-# digc is a command line gopher client written in LDPL, a language
-# for programmers. The client is very simple.
+# gild is a command line gopher client written in LDPL, a language
+# for programmers. The client is very simple and very hacky.
 #
 ## TODO
 # [x] Connect to server and print response (bad: depends on nc)
