@@ -1,16 +1,25 @@
-* GILD: Gopherin' around with LDPL
+                              * * *
+                     _____ _____ _    ______ 
+                    |  __ \_   _| |   |  _  \
+                    | |  \/ | | | |   | | | |
+                    | | __  | | | |   | | | |
+                    | |_\ \_| |_| |___| |/ / 
+                     \____/\___/\_____/___/  
+
+                              * * *
 
 GILD is a command line gopher client written in LDPL, a language
 for programmers. This client is a big hack that requires a working
-UNIX environment.
+UNIX environment. Specifically, the `nc` and `tput` UNIX commands.
+For now.
 
-   (\~---.
-   /   (\-`-/)
-  (      ' ' )
-   \ (  \_Y_/\
-    ""\ \___//
-       `w   "    -nathaN 
-
+                           (\~---.
+                           /   (\-`-/)
+                          (      ' ' )
+                           \ (  \_Y_/\
+                            ""\ \___//
+                               `w   "    -nathaN 
+                    
 Usage 
 ~~~~~
 
