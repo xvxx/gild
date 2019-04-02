@@ -22,13 +22,14 @@ len is number
 buf is text
 tabs is number
 type is text
+link-num is number
 
 colormap is text vector
 linktypes is number vector
 
-link-num is number
 
 PROCEDURE:
+
 store "\e[32m" in colormap:"0" # file
 store "\e[34m" in colormap:"1" # dir
 store "\e[33m" in colormap:"i" # info
@@ -48,36 +49,36 @@ sub-procedure gopher-print
     store 0 in link-num
 
     get character at index from gopher.response in char
-    while char is not equal to "" do 
+    while char is not equal to "" do
         if char is equal to "\r" then
             add 1 and index in index
             get character at index from gopher.response in char
             if char is equal to "\n" then
-                get character at 0 from line in char  
-                if linktypes:char is equal to 1 then 
+                get character at 0 from line in char
+                if linktypes:char is equal to 1 then
                     display colormap:"L" "   "
                     add 1 and link-num in link-num
-                    if link-num is less than 10 then 
-                        display "0" link-num 
-                    else 
-                        display link-num 
-                    end if 
+                    if link-num is less than 10 then
+                        display "0" link-num
+                    else
+                        display link-num
+                    end if
                     display ". "
                     store line in gopher.links:link-num
                 else
                     display "       "
-                end if 
-                store colormap:char in char 
-                if char is equal to "" then 
-                    store colormap:0 in char 
+                end if
+                store colormap:char in char
+                if char is equal to "" then
+                    store colormap:0 in char
                 end if
                 display char
-                store 1 in i 
+                store 1 in i
                 store length of line in len
                 store "" in buf
-                while i is less than len do 
+                while i is less than len do
                     get character at i from line in char
-                    if char is equal to "\t" then 
+                    if char is equal to "\t" then
                         break
                     end if
                     join buf and char in buf
@@ -109,36 +110,43 @@ sub-procedure gopher-get
 end sub-procedure
 
 sub-procedure gopher-parse-link
-    store 1 in i 
+    store 1 in i
     store 0 in tabs
-    store "" in buf 
+    store "" in buf
     store length of gopher.links:input in len
     get character at 0 from gopher.links:input in type
-    
-    while i is less than len do 
+
+    while i is less than len do
         get character at i from gopher.links:input in char
         add 1 and i in i
         if char is equal to "\t" then
             add 1 and tabs in tabs
-            if tabs is equal to 2 then 
+            if tabs is equal to 2 then
                 store buf in gopher.selector
-            end if 
-            if tabs is equal to 3 then 
+            end if
+            if tabs is equal to 3 then
                 store buf in gopher.host
-            end if 
-            store "" in buf 
-        else 
-            join buf and char in buf 
-        end if 
-    repeat 
+            end if
+            store "" in buf
+        else
+            join buf and char in buf
+        end if
+    repeat
 
     store buf in gopher.port
 end sub-procedure
 
 sub-procedure gopher-prompt
-    display "Enter #: "
+    display "\e[36;1m[\e[37m"
+    display "# to visit, 0 to go back, Ctrl-C to quit"
+    display "\e[36m]: \e[0m"
     accept input
-    call sub-procedure gopher-parse-link
+    if input is equal to 0 then
+        display "go back" crlf
+        exit
+    else
+        call sub-procedure gopher-parse-link
+    end if
 end sub-procedure
 
 # main
