@@ -1,4 +1,11 @@
-* GILD: Gopher client in LDPL
+* GILD: A Gopher client in LDPL
+
+   (\~---.
+   /   (\-`-/)
+  (      ' ' )
+   \ (  \_Y_/\
+    ""\ \___//
+       `w   "    -nathaN 
 
 To use it, first install the LDPL programming language:
 
