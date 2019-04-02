@@ -95,6 +95,7 @@ sub-procedure gopher-print
 end sub-procedure
 
 sub-procedure gopher-get
+    store "" in command
     if gopher.selector is equal to "" then
         store "echo \"\r\" | nc " in command
     else
@@ -137,7 +138,6 @@ end sub-procedure
 sub-procedure gopher-prompt
     display "Enter #: "
     accept input
-    display gopher.links:input crlf
     call sub-procedure gopher-parse-link
 end sub-procedure
 
