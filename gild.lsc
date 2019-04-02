@@ -10,6 +10,9 @@ gopher.response is text
 
 # page navigation
 gopher.links is text vector
+gopher.history is text vector
+gopher.hp is number # history pointer
+gopher.parse-link-input is text
 
 # generic locals
 index is number
@@ -27,8 +30,22 @@ link-num is number
 colormap is text vector
 linktypes is number vector
 
-
 PROCEDURE:
+
+store 0 in gopher.hp # history pointer
+
+store 0 in index 
+store 0 in input 
+store 0 in i 
+store 0 in len
+store 0 in link-num
+store 0 in tabs 
+
+store "" in command 
+store "" in line 
+store "" in char
+store "" in buf 
+store "" in type 
 
 store "\e[32m" in colormap:"0" # file
 store "\e[34m" in colormap:"1" # dir
@@ -113,11 +130,16 @@ sub-procedure gopher-parse-link
     store 1 in i
     store 0 in tabs
     store "" in buf
-    store length of gopher.links:input in len
-    get character at 0 from gopher.links:input in type
+    store length of gopher.parse-link-input in len
+    get character at 0 from gopher.parse-link-input in type
+    
+    if gopher.parse-link-input is not equal to gopher.history:gopher.hp then
+        add 1 and gopher.hp in gopher.hp
+        store gopher.parse-link-input in gopher.history:gopher.hp
+    end if 
 
     while i is less than len do
-        get character at i from gopher.links:input in char
+        get character at i from gopher.parse-link-input in char
         add 1 and i in i
         if char is equal to "\t" then
             add 1 and tabs in tabs
@@ -138,13 +160,22 @@ end sub-procedure
 
 sub-procedure gopher-prompt
     display "\e[36;1m[\e[37m"
-    display "# to visit, 0 to go back, Ctrl-C to quit"
+    display "# to visit, "
+    if gopher.hp is greater than 1 then 
+        display "0 to go back, "
+    end if 
+    display "Ctrl-C to quit"
     display "\e[36m]: \e[0m"
     accept input
     if input is equal to 0 then
-        display "go back" crlf
-        exit
+        if gopher.hp is less than or equal to 1 then 
+            return
+        end if
+        subtract 1 from gopher.hp in gopher.hp
+        store gopher.history:gopher.hp in gopher.parse-link-input
+        call sub-procedure gopher-parse-link
     else
+        store gopher.links:input in gopher.parse-link-input
         call sub-procedure gopher-parse-link
     end if
 end sub-procedure
@@ -158,6 +189,9 @@ end if
 store argv:0 in gopher.host
 store argv:1 in gopher.port
 store argv:2 in gopher.selector
+
+add 1 and gopher.hp in gopher.hp
+in gopher.history:gopher.hp join "0null\t" gopher.selector "\t" gopher.host "\t" gopher.port
 
 if argv:1 is equal to "" then
     store "70" in gopher.port
