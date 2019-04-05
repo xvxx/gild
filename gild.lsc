@@ -49,6 +49,33 @@ store "\e[35m" in colormap:"L" # link
 store 1 in linktypes:"0" # file
 store 1 in linktypes:"1" # dir
 
+sub-procedure count-tabs-in-response
+    store 0 in i
+    store 0 in tabs
+    store "" in char
+    get character at i from gopher.response in char
+    while char is not equal to "" do 
+        if char is equal to "\t" then
+            add 1 and tabs in tabs
+        end if
+
+        if char is equal to "\n" then 
+            add 1 and lines in lines
+        end if 
+        
+        if tabs is greater than or equal to 4 then 
+            return
+        end if 
+
+        add 1 and i in i
+        get character at i from gopher.response in char
+
+        if lines is equal to 3 then  # no tabs in 3 lines, not a menu
+            return 
+        end if
+    repeat
+end sub-procedure
+
 # prints the content of gopher.response to the screen 
 sub-procedure gopher-print
     store 0 in index
@@ -59,6 +86,28 @@ sub-procedure gopher-print
     store 1 in lines
 
     store gopher.overflow in index
+
+    # assume it's a regular file if there are fewer than 4 \t chars 
+    # in the gopher.response
+    store 0 in tabs
+    call count-tabs-in-response
+    if tabs is less than 4 then 
+        get character at index from gopher.response in char
+        while char is not equal to "" do
+            if lines is greater than or equal to window.rows then 
+                store index in gopher.overflow
+                break 
+            end if 
+            if char is equal to "\n" then
+                add 1 and lines in lines
+            end if 
+            in out join out char 
+            add 1 and index in index
+            get character at index from gopher.response in char
+        repeat
+        display out crlf
+        return
+    end if  
 
     get character at index from gopher.response in char
     while char is not equal to "" do
