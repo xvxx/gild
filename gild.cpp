@@ -12,6 +12,7 @@ void GOPHER_GET()
 {
     int sock = connect_to(GOPHER_HOST, GOPHER_PORT);
     GOPHER_RESPONSE = fetch(sock, GOPHER_SELECTOR);
+    close(sock);
 }
 
 void error(const string & msg)
@@ -55,22 +56,22 @@ string fetch(int sock, string & selector)
     if (send(sock,request.c_str(),request.size(),0) != request.size())
         error("send() sent unexpected number of bytes");
 
-    int rsize = 500000; // XXX 500k? bigger?
-    string response;
-    char buf[rsize];
-    int bytes, totalBytes = 0;
-    while (totalBytes < rsize) {
-        if ((bytes = read(sock, buf, rsize)) < 0)
-            error("recv() failed");
-        if (bytes == 0) break;
-        totalBytes += bytes;
-        response += buf;
+    int bsize = 999999; // XXX 999k? bigger?
+    int bytes = 0;
+    int i = 0;
+    char buf[bsize];
+    string output;
+
+    while((i=read(sock,buf+bytes,bsize-bytes))!=0){
+        bytes+=i;
     }
 
-    if (response[totalBytes-3] == '.' &&
-        response[totalBytes-2] == '\r' &&
-        response[totalBytes-1] == '\n') {
-        response[totalBytes-3] = '\0';
+    string response = buf;
+
+    if(response[response.size()-3]=='.' &&
+       response[response.size()-2]=='\r' &&
+       response[response.size()-1]=='\n'){
+        response[response.size()-3] = 0;
     }
 
     return response;
