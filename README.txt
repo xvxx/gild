@@ -24,8 +24,7 @@ Usage
 
 1. Install the LDPL programming language: https://ldpl.lartu.net/
 
-(NOTE: Right now you actually need to install the `extensions` branch 
-from github.com/dvkt/ldpl.)
+(NOTE: Install the `extensions` branch from github.com/dvkt/ldpl)
 
 2. With `ldpl` in your path, build GILD:
 
@@ -45,7 +44,7 @@ TODO
 [✓] Connect to server and print response (bad: depends on nc)
 [✓] Display dir contents in technicolor
 [✓] Prompt-based navigation (show link #s and ask what to do)
-[ ] 0 to go back 
+[✓] 0 to go back 
 [ ] Render one page at a time
 [ ] Pipe file contents to less (or just use the same infra as menus)
 [ ] Search
