@@ -9,9 +9,8 @@
                               * * *
 
 GILD is a command line gopher client written in LDPL, a language
-for programmers. This client is a big hack that requires a working
-UNIX environment. Specifically, the `nc` and `tput` UNIX commands.
-For now.
+for programmers. This client is a big hack that requires dvkt's  
+experimental fork of LDPL. For now.
 
                            (\~---.
                            /   (\-`-/)
@@ -55,5 +54,5 @@ TODO
 
 [ ] Download file to pwd 
 [ ] Render images in fancy terminals like kitty 
-[ ] move from nc to socket API (need: LDPL C/C++ interop)
+[✓] move from nc to socket API (need: LDPL C/C++ interop)
 [ ] Are we missing anything basic?

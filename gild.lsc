@@ -106,24 +106,6 @@ sub-procedure gopher-print
     repeat
 end sub-procedure
 
-# gopher.selector
-# gopher.host
-# gopher.port
-# gopher.response
-sub-procedure gopher-get2
-    store "" in command
-    if gopher.selector is equal to "" then
-        store "echo \"\r\" | nc " in command
-    else
-        join "echo \"" and gopher.selector in command
-        join command and "\r\" | nc " in command
-    end if
-    join command and gopher.host in command
-    join command and " " in command
-    join command and gopher.port in command
-    execute command and store output in gopher.response
-end sub-procedure
-
 sub-procedure gopher-parse-link
     store 1 in i
     store 0 in tabs
