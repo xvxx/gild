@@ -42,7 +42,7 @@ int connect_to(string & hostname, int port)
     servAddr.sin_port        = htons(port);
 
     if(connect(sock,(struct sockaddr*)&servAddr,sizeof(servAddr)) < 0)
-        error("connect() failed");
+        error("connect() failed host:"+hostname+" port:"+to_string(port));
 
     return sock;
 }
