@@ -22,6 +22,17 @@ experimental fork of LDPL. For now.
 Usage 
 ~~~~~
 
+    Usage: gild hostname [port [selector]]
+    
+    $ gild gopher.black
+    $ gild sdf.org 70
+    $ gild hngopher.com 70 /live/p1/
+
+Install
+~~~~~~~
+
+*-*-* Mac & Linux Binaries Coming Soon *-*-*
+
 1. Install the LDPL programming language: https://ldpl.lartu.net/
 
 (NOTE: Install the `extensions` branch from github.com/dvkt/ldpl)
@@ -30,11 +41,9 @@ Usage
 
     $ make build
 
-3. Now visit your favorite gopher server!
+3. Now visit your favorite gopher servers!
 
-    $ ./gild gopher.black
-    $ ./gild sdf.org 70
-    $ ./gild hngopher.com 70 /live/p1/
+    $ ./gild bitreich.org
 
 TODO 
 ~~~~

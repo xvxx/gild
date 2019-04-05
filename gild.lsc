@@ -251,7 +251,7 @@ end sub-procedure
 # MAIN:
 
 if argc is equal to 0 then
-    display "Usage: gild hostname [port] [selector]" crlf
+    display "Usage: gild hostname [port [selector]]" crlf
     exit
 end if
 
