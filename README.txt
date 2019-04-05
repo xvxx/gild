@@ -45,7 +45,7 @@ TODO
 [✓] Display dir contents in technicolor
 [✓] Prompt-based navigation (show link #s and ask what to do)
 [✓] 0 to go back 
-[ ] Render one page at a time
+[✓] Render one page at a time
 [ ] Pipe file contents to less (or just use the same infra as menus)
 [ ] Search
 
