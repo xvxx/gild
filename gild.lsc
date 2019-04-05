@@ -42,12 +42,14 @@ store "\e[32m" in colormap:"0" # file
 store "\e[34m" in colormap:"1" # dir
 store "\e[33m" in colormap:"i" # info
 store "\e[31m" in colormap:"3" # err
+store "\e[37m" in colormap:"7" # search
 store "\e[36m" in colormap:"h" # html
 store "\e[37m" in colormap:0   # nada
 store "\e[35m" in colormap:"L" # link
 
 store 1 in linktypes:"0" # file
 store 1 in linktypes:"1" # dir
+store 1 in linktypes:"7" # search
 
 sub-procedure count-tabs-in-response
     store 0 in i
@@ -239,12 +241,21 @@ sub-procedure gopher-prompt
 
     store 0 in gopher.link-num
     store 0 in gopher.overflow
-
     store input in i # convert to number
+
     if i is greater than 0 then
         store gopher.links:i in gopher.parse-link-input
         call sub-procedure gopher-parse-link
     end if
+
+    # search prompt
+    store input in i # convert to number
+    get character at 0 from gopher.links:i in char
+    if char is equal to "7" then 
+        display "Search: "
+        accept input
+        in gopher.selector join gopher.selector "\t" input
+    end if 
 end sub-procedure
 
 
