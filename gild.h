@@ -1,5 +1,7 @@
 #include <string>
 
+using std::string;
+
 #ifndef ldpl_number
 #define ldpl_number double
 #endif
@@ -17,3 +19,8 @@ void SUBPR_GOPHERr_UGET();            // sub-procedure gopher-get
 #define GOPHER_SELECTOR VAR_GOPHERr_VSELECTOR
 #define GOPHER_RESPONSE VAR_GOPHERr_VRESPONSE
 #define GOPHER_GET SUBPR_GOPHERr_UGET
+
+// module functions
+void error(const string & msg);
+int connect_to(string & hostname, int port);
+string fetch(int sock, string & selector);
