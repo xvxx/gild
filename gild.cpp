@@ -4,22 +4,34 @@
 #include <string>
 #include <sys/ioctl.h>
 #include <unistd.h>
+#include <unordered_map>
 
 #include "gild.h"
 
 using namespace std;
+
+static unordered_map<string, string> response_cache;
 
 void GOPHER_INIT()
 {
     signal(SIGWINCH, signal_handler);
     // signal(SIGCONT, signal_handler);
     set_term_size();
+    unordered_map<string, string> response_cache = {};
 }
 
 void GOPHER_GET() 
 {
+    string cache_key = GOPHER_HOST+":"+to_string(GOPHER_PORT)+GOPHER_SELECTOR;
+    if(response_cache.find(cache_key)!=response_cache.end())
+    {
+        GOPHER_RESPONSE = response_cache[cache_key];
+        return;
+    }
+
     int sock = connect_to(GOPHER_HOST, GOPHER_PORT);
     GOPHER_RESPONSE = fetch(sock, GOPHER_SELECTOR);
+    response_cache[cache_key] = GOPHER_RESPONSE;
     close(sock);
 }
 
