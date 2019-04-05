@@ -9,7 +9,9 @@ gild.o:
 gild: gild.a
 	ldpl -i=gild.h -o=gild gild.lsc
 
-build: gild
+build: 
+	make clean
+	make gild
 
 run: build
 	./gild localhost 6969
