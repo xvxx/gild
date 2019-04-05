@@ -61,7 +61,7 @@ sub-procedure gopher-print
                 get character at 0 from line in char
                 if linktypes:char is equal to 1 then
                     display colormap:"L" "   "
-                    add 1 and link-num in link-num
+                        add 1 and link-num in link-num
                     if link-num is less than 10 then
                         display "0" link-num
                     else
@@ -167,7 +167,7 @@ add 1 and gopher.hp in gopher.hp
 in gopher.history:gopher.hp join "0null\t" gopher.selector "\t" gopher.host "\t" gopher.port
 
 if argv:1 is equal to "" then
-    store "70" in gopher.port
+    store 70 in gopher.port
 end if
 
 while 1 is greater than 0 do
