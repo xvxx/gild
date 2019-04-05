@@ -65,6 +65,7 @@ string fetch(int sock, string & selector)
     while((i=read(sock,buf+bytes,bsize-bytes))!=0){
         bytes+=i;
     }
+    buf[bytes] = 0;
 
     string response = buf;
 
