@@ -28,6 +28,7 @@ char is text
 i is number
 len is number
 buf is text
+out is text
 tabs is number
 type is text
 
@@ -55,6 +56,7 @@ sub-procedure gopher-print
     store "" in char
     store "" in line
     store "" in buf
+    store "" in out
     store 1 in lines
 
     store gopher.overflow in index
@@ -73,23 +75,23 @@ sub-procedure gopher-print
                 add 1 and lines in lines
                 get character at 0 from line in char
                 if linktypes:char is equal to 1 then
-                    display colormap:"L" "   "
+                    in out join out colormap:"L" "   "
                         add 1 and gopher.link-num in gopher.link-num
                     if gopher.link-num is less than 10 then
-                        display "0" gopher.link-num
+                        in out join out "0" gopher.link-num
                     else
-                        display gopher.link-num
+                        in out join out gopher.link-num
                     end if
-                    display ". "
+                    in out join out ". "
                     store line in gopher.links:gopher.link-num
                 else
-                    display "       "
+                    in out join out "       "
                 end if
                 store colormap:char in char
                 if char is equal to "" then
                     store colormap:0 in char
                 end if
-                display char
+                in out join out char
                 store 1 in i
                 store length of line in len
                 store "" in buf
@@ -101,7 +103,7 @@ sub-procedure gopher-print
                     join buf and char in buf
                     add 1 and i in i
                 repeat
-                display buf crlf
+                in out join out buf crlf
                 store "" in line
             end if
         else
@@ -110,6 +112,7 @@ sub-procedure gopher-print
         add 1 and index in index
         get character at index from gopher.response in char
     repeat
+    display out 
 end sub-procedure
 
 # parses a single line from a gopher.response into the gopher.host 
