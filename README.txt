@@ -10,7 +10,7 @@
 
 GILD is a gopher client for the terminal written in LDPL, a language
 for programmers. This client is a big hack that requires dvkt's  
-experimental fork of LDPL. For now.
+experimental fork of LDPL. For now. Consider it a work in progress.
                     
 Usage 
 ~~~~~
