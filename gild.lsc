@@ -163,12 +163,12 @@ store argv:0 in gopher.host
 store argv:1 in gopher.port
 store argv:2 in gopher.selector
 
-add 1 and gopher.hp in gopher.hp
-in gopher.history:gopher.hp join "0null\t" gopher.selector "\t" gopher.host "\t" gopher.port
-
 if argv:1 is equal to "" then
     store 70 in gopher.port
 end if
+
+add 1 and gopher.hp in gopher.hp
+in gopher.history:gopher.hp join "0null\t" gopher.selector "\t" gopher.host "\t" gopher.port
 
 while 1 is greater than 0 do
     call sub-procedure gopher-get
