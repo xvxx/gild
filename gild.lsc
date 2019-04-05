@@ -203,7 +203,9 @@ end sub-procedure
 # uses gopher.links and gopher.history for navigation
 sub-procedure gopher-prompt
     display "\e[36;1m[\e[37m"
-    display "# to visit, "
+    if gopher.link-num is greater than 0 then 
+        display "# to open, "
+    end if
     if gopher.hp is greater than 1 then 
         display "0 to go back, "
     end if 
