@@ -165,6 +165,10 @@ sub-procedure gopher-prompt
     display "\e[36m]: \e[0m"
     accept input
 
+    if input is equal to "q" then # quit
+        exit
+    end if 
+
     if input is equal to "0" then # back in history
         store 0 in gopher.link-num
         store 0 in gopher.overflow
