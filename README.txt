@@ -39,7 +39,7 @@ Usage
 TODO 
 ~~~~
 
-[✓] Connect to server and print response (bad: depends on nc)
+[✓] Connect to server and print response 
 [✓] Display dir contents in technicolor
 [✓] Prompt-based navigation (show link #s and ask what to do)
 [✓] 0 to go back 
