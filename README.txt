@@ -39,8 +39,6 @@ Usage
 TODO 
 ~~~~
 
-** Essential
-
 [✓] Connect to server and print response (bad: depends on nc)
 [✓] Display dir contents in technicolor
 [✓] Prompt-based navigation (show link #s and ask what to do)
@@ -48,10 +46,3 @@ TODO
 [✓] Render one page at a time
 [✓] Pipe file contents to less (or just use the same infra as menus)
 [ ] Search
-
-** Nice to have 
-
-[ ] Download file to pwd 
-[ ] Render images in fancy terminals like kitty 
-[✓] move from nc to socket API (need: LDPL C/C++ interop)
-[ ] Are we missing anything basic?
