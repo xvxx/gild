@@ -16,10 +16,12 @@ gopher.links is text vector
 gopher.history is text vector
 gopher.hp is number # history pointer
 gopher.parse-link-input is text
+gopher.overflow is number
+gopher.link-num is number
 
 # generic locals
 index is number
-input is number
+input is text
 lines is number
 line is text
 char is text
@@ -28,7 +30,6 @@ len is number
 buf is text
 tabs is number
 type is text
-link-num is number
 
 # dictionaries 
 colormap is text vector
@@ -54,12 +55,14 @@ sub-procedure gopher-print
     store "" in char
     store "" in line
     store "" in buf
-    store 0 in link-num
     store 1 in lines
+
+    store gopher.overflow in index
 
     get character at index from gopher.response in char
     while char is not equal to "" do
         if lines is greater than or equal to window.rows then 
+            store index in gopher.overflow
             break 
         end if 
 
@@ -71,14 +74,14 @@ sub-procedure gopher-print
                 get character at 0 from line in char
                 if linktypes:char is equal to 1 then
                     display colormap:"L" "   "
-                        add 1 and link-num in link-num
-                    if link-num is less than 10 then
-                        display "0" link-num
+                        add 1 and gopher.link-num in gopher.link-num
+                    if gopher.link-num is less than 10 then
+                        display "0" gopher.link-num
                     else
-                        display link-num
+                        display gopher.link-num
                     end if
                     display ". "
-                    store line in gopher.links:link-num
+                    store line in gopher.links:gopher.link-num
                 else
                     display "       "
                 end if
@@ -152,18 +155,35 @@ sub-procedure gopher-prompt
     if gopher.hp is greater than 1 then 
         display "0 to go back, "
     end if 
+    if gopher.overflow is greater than 0 then 
+        display "SPACE for more, - to go up, "
+    end if 
     display "Ctrl-C to quit"
     display "\e[36m]: \e[0m"
     accept input
-    if input is equal to 0 then
+
+    if input is equal to "0" then
+        store 0 in gopher.link-num
+        store 0 in gopher.overflow
         if gopher.hp is less than or equal to 1 then 
             return
         end if
         subtract 1 from gopher.hp in gopher.hp
         store gopher.history:gopher.hp in gopher.parse-link-input
         call sub-procedure gopher-parse-link
-    else
-        store gopher.links:input in gopher.parse-link-input
+        return
+    end if  
+
+    if input is equal to " " then 
+        return
+    end if 
+
+    store 0 in gopher.link-num
+    store 0 in gopher.overflow
+
+    store input in i # convert to number
+    if i is greater than 0 then
+        store gopher.links:i in gopher.parse-link-input
         call sub-procedure gopher-parse-link
     end if
 end sub-procedure
