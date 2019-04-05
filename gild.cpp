@@ -2,11 +2,19 @@
 #include <iostream>
 #include <netdb.h>
 #include <string>
+#include <sys/ioctl.h>
 #include <unistd.h>
 
 #include "gild.h"
 
 using namespace std;
+
+void GOPHER_INIT()
+{
+    signal(SIGWINCH, signal_handler);
+    // signal(SIGCONT, signal_handler);
+    set_term_size();
+}
 
 void GOPHER_GET() 
 {
@@ -21,6 +29,20 @@ void error(const string & msg)
     cerr << msg;
     cerr << "\033[0m" << endl;
     exit(1);
+}
+
+void signal_handler(int sig) 
+{
+    if (sig == SIGWINCH) set_term_size();
+    // if (sig == SIGCONT) draw();
+}
+
+void set_term_size() 
+{
+    struct winsize w;
+    ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
+    WINDOW_ROWS = (ldpl_number)w.ws_row;
+    WINDOW_COLS = (ldpl_number)w.ws_col;
 }
 
 int connect_to(string & hostname, int port)

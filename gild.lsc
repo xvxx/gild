@@ -4,6 +4,8 @@
 DATA:
 
 # variables defined in gild.h
+# - window.rows is number
+# - window.cols is number
 # - gopher.host is text
 # - gopher.port is number
 # - gopher.selector is text
@@ -18,6 +20,7 @@ gopher.parse-link-input is text
 # generic locals
 index is number
 input is number
+lines is number
 line is text
 char is text
 i is number
@@ -52,13 +55,19 @@ sub-procedure gopher-print
     store "" in line
     store "" in buf
     store 0 in link-num
+    store 1 in lines
 
     get character at index from gopher.response in char
     while char is not equal to "" do
+        if lines is greater than or equal to window.rows then 
+            break 
+        end if 
+
         if char is equal to "\r" then
             add 1 and index in index
             get character at index from gopher.response in char
             if char is equal to "\n" then
+                add 1 and lines in lines
                 get character at 0 from line in char
                 if linktypes:char is equal to 1 then
                     display colormap:"L" "   "
@@ -180,6 +189,7 @@ add 1 and gopher.hp in gopher.hp
 in gopher.history:gopher.hp join "0null\t" gopher.selector "\t" gopher.host "\t" gopher.port
 
 # run loop
+call sub-procedure gopher-init
 while 1 is greater than 0 do
     call sub-procedure gopher-get  
     call sub-procedure gopher-print
