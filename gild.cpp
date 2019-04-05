@@ -15,9 +15,7 @@ static unordered_map<string, string> response_cache;
 void GOPHER_INIT()
 {
     signal(SIGWINCH, signal_handler);
-    // signal(SIGCONT, signal_handler);
     set_term_size();
-    unordered_map<string, string> response_cache = {};
 }
 
 void GOPHER_GET() 
@@ -46,7 +44,6 @@ void error(const string & msg)
 void signal_handler(int sig) 
 {
     if (sig == SIGWINCH) set_term_size();
-    // if (sig == SIGCONT) draw();
 }
 
 void set_term_size() 
