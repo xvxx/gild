@@ -45,6 +45,7 @@ store "\e[35m" in colormap:"L" # link
 store 1 in linktypes:"0" # file
 store 1 in linktypes:"1" # dir
 
+# prints the content of gopher.response to the screen 
 sub-procedure gopher-print
     store 0 in index
     store "" in char
@@ -99,6 +100,9 @@ sub-procedure gopher-print
     repeat
 end sub-procedure
 
+# parses a single line from a gopher.response into the gopher.host 
+# gopher.port and gopher.selector variables. 
+# also adds the parsed link to the history.
 sub-procedure gopher-parse-link
     store 1 in i
     store 0 in tabs
@@ -131,6 +135,8 @@ sub-procedure gopher-parse-link
     store buf in gopher.port
 end sub-procedure
 
+# prompts the user for navigation. 
+# uses gopher.links and gopher.history for navigation
 sub-procedure gopher-prompt
     display "\e[36;1m[\e[37m"
     display "# to visit, "
@@ -153,7 +159,9 @@ sub-procedure gopher-prompt
     end if
 end sub-procedure
 
-# main
+
+# MAIN:
+
 if argc is equal to 0 then
     display "Usage: gild hostname [port] [selector]" crlf
     exit
@@ -167,11 +175,13 @@ if argv:1 is equal to "" then
     store 70 in gopher.port
 end if
 
+# store initial site in history
 add 1 and gopher.hp in gopher.hp
 in gopher.history:gopher.hp join "0null\t" gopher.selector "\t" gopher.host "\t" gopher.port
 
+# run loop
 while 1 is greater than 0 do
-    call sub-procedure gopher-get
+    call sub-procedure gopher-get  
     call sub-procedure gopher-print
     call sub-procedure gopher-prompt
 repeat
