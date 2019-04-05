@@ -162,7 +162,7 @@ sub-procedure gopher-prompt
     display "\e[36m]: \e[0m"
     accept input
 
-    if input is equal to "0" then
+    if input is equal to "0" then # back in history
         store 0 in gopher.link-num
         store 0 in gopher.overflow
         if gopher.hp is less than or equal to 1 then 
@@ -174,7 +174,10 @@ sub-procedure gopher-prompt
         return
     end if  
 
-    if input is equal to " " then 
+    if input is equal to "-" then # pageup
+    end if 
+
+    if input is equal to " " then # pagedown
         return
     end if 
 
