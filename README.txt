@@ -11,13 +11,6 @@
 GILD is a command line gopher client written in LDPL, a language
 for programmers. This client is a big hack that requires dvkt's  
 experimental fork of LDPL. For now.
-
-                           (\~---.
-                           /   (\-`-/)
-                          (      ' ' )
-                           \ (  \_Y_/\
-                            ""\ \___//
-                               `w   "    -nathaN 
                     
 Usage 
 ~~~~~
@@ -55,3 +48,10 @@ TODO
 [✓] Render one page at a time
 [✓] Pipe file contents to less (or just use the same infra as menus)
 [✓] Search
+
+                           (\~---.
+                           /   (\-`-/)
+                          (      ' ' )
+                           \ (  \_Y_/\
+                            ""\ \___//
+                               `w   "    -nathaN 
