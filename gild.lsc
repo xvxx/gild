@@ -259,11 +259,21 @@ sub-procedure gopher-prompt
 end sub-procedure
 
 
+sub-procedure print-usage
+    display "Usage: gild hostname [port [selector]]" crlf    
+    exit
+end sub-procedure
+
 # MAIN:
 
 if argc is equal to 0 then
-    display "Usage: gild hostname [port [selector]]" crlf
-    exit
+    call print-usage
+end if
+if argv:0 is equal to "-h" then 
+    call print-usage 
+end if
+if argv:0 is equal to "--help" then
+    call print-usage 
 end if
 
 store argv:0 in gopher.host
