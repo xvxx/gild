@@ -6,7 +6,7 @@ gild.a: gild.o
 gild.o: gild.cpp gild.h
 	c++ -c gild.cpp -std=gnu++11 -o gild.o
 
-gild: gild.a
+gild: gild.a gild.lsc
 	ldpl -i=gild.h -o=gild gild.lsc
 
 build: gild
