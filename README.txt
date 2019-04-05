@@ -25,6 +25,9 @@ Usage
 
 1. Install the LDPL programming language: https://ldpl.lartu.net/
 
+(NOTE: Right now you actually need to install the `extensions` branch 
+from github.com/dvkt/ldpl.)
+
 2. With `ldpl` in your path, build GILD:
 
     $ make build

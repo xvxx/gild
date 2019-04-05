@@ -2,12 +2,6 @@
 
 DATA:
 
-# gopher config
-gopher.host is text
-gopher.port is text
-gopher.selector is text
-gopher.response is text
-
 # page navigation
 gopher.links is text vector
 gopher.history is text vector
@@ -112,7 +106,11 @@ sub-procedure gopher-print
     repeat
 end sub-procedure
 
-sub-procedure gopher-get
+# gopher.selector
+# gopher.host
+# gopher.port
+# gopher.response
+sub-procedure gopher-get2
     store "" in command
     if gopher.selector is equal to "" then
         store "echo \"\r\" | nc " in command
