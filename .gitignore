@@ -2,3 +2,4 @@ gild
 .vscode
 gild.a
 gild.o
+dist/
