@@ -13,7 +13,7 @@ extern string VAR_GOPHERr_VSELECTOR;  // gopher.selector is text
 extern string VAR_GOPHERr_VRESPONSE;  // gopher.response is text
 extern ldpl_number VAR_WINDOWr_VROWS; // window.rows is number
 extern ldpl_number VAR_WINDOWr_VCOLS; // window.cols is number
-void SUBPR_GOPHERr_UGET();            // sub-procedure gopher-get 
+void SUBPR_GOPHERr_UGET();            // sub-procedure gopher-get
 void SUBPR_GOPHERr_UINIT();           // sub-procedure gopher-init
 
 // aliases for nicer code

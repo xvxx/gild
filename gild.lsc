@@ -31,7 +31,7 @@ buf is text
 out is text
 tabs is number
 
-# dictionaries 
+# dictionaries
 colormap is text vector
 linktypes is number vector
 
@@ -56,29 +56,29 @@ sub-procedure count-tabs-in-response
     store 0 in tabs
     store "" in char
     get character at i from gopher.response in char
-    while char is not equal to "" do 
+    while char is not equal to "" do
         if char is equal to "\t" then
             add 1 and tabs in tabs
         end if
 
-        if char is equal to "\n" then 
+        if char is equal to "\n" then
             add 1 and lines in lines
-        end if 
-        
-        if tabs is greater than or equal to 4 then 
+        end if
+
+        if tabs is greater than or equal to 4 then
             return
-        end if 
+        end if
 
         add 1 and i in i
         get character at i from gopher.response in char
 
         if lines is equal to 3 then  # no tabs in 3 lines, not a menu
-            return 
+            return
         end if
     repeat
 end sub-procedure
 
-# prints the content of gopher.response to the screen 
+# prints the content of gopher.response to the screen
 sub-procedure gopher-print
     store 0 in index
     store "" in char
@@ -89,34 +89,34 @@ sub-procedure gopher-print
 
     store gopher.overflow in index
 
-    # assume it's a regular file if there are fewer than 4 \t chars 
+    # assume it's a regular file if there are fewer than 4 \t chars
     # in the gopher.response
     store 0 in tabs
     call count-tabs-in-response
-    if tabs is less than 4 then 
+    if tabs is less than 4 then
         get character at index from gopher.response in char
         while char is not equal to "" do
-            if lines is greater than window.rows then 
+            if lines is greater than window.rows then
                 store index in gopher.overflow
-                break 
-            end if 
+                break
+            end if
             if char is equal to "\n" then
                 add 1 and lines in lines
-            end if 
-            in out join out char 
+            end if
+            in out join out char
             add 1 and index in index
             get character at index from gopher.response in char
         repeat
         display out crlf
         return
-    end if  
+    end if
 
     get character at index from gopher.response in char
     while char is not equal to "" do
-        if lines is greater than or equal to window.rows then 
+        if lines is greater than or equal to window.rows then
             store index in gopher.overflow
-            break 
-        end if 
+            break
+        end if
 
         if char is equal to "\r" then
             add 1 and index in index
@@ -162,22 +162,22 @@ sub-procedure gopher-print
         add 1 and index in index
         get character at index from gopher.response in char
     repeat
-    display out 
+    display out
 end sub-procedure
 
-# parses a single line from a gopher.response into the gopher.host 
-# gopher.port and gopher.selector variables. 
+# parses a single line from a gopher.response into the gopher.host
+# gopher.port and gopher.selector variables.
 # also adds the parsed link to the history.
 sub-procedure gopher-parse-link
     store 1 in i
     store 0 in tabs
     store "" in buf
     store length of gopher.parse-link-input in len
-    
+
     if gopher.parse-link-input is not equal to gopher.history:gopher.hp then
         add 1 and gopher.hp in gopher.hp
         store gopher.parse-link-input in gopher.history:gopher.hp
-    end if 
+    end if
 
     while i is less than len do
         get character at i from gopher.parse-link-input in char
@@ -199,47 +199,47 @@ sub-procedure gopher-parse-link
     store buf in gopher.port
 end sub-procedure
 
-# prompts the user for navigation. 
+# prompts the user for navigation.
 # uses gopher.links and gopher.history for navigation
 sub-procedure gopher-prompt
     display "\e[36;1m[\e[37m"
-    if gopher.link-num is greater than 0 then 
+    if gopher.link-num is greater than 0 then
         display "# to open, "
     end if
-    if gopher.hp is greater than 1 then 
+    if gopher.hp is greater than 1 then
         display "0 to go back, "
-    end if 
-    if lines is greater than or equal to window.rows then 
+    end if
+    if lines is greater than or equal to window.rows then
         display "SPACE for more, - to go up, "
-    end if 
+    end if
     display "Ctrl-C to quit"
     display "\e[36m]: \e[0m"
     accept input
 
     if input is equal to "q" then # quit
         exit
-    end if 
+    end if
 
     if input is equal to "0" then # back in history
         store 0 in gopher.link-num
         store 0 in gopher.overflow
-        if gopher.hp is less than or equal to 1 then 
+        if gopher.hp is less than or equal to 1 then
             return
         end if
         subtract 1 from gopher.hp in gopher.hp
         store gopher.history:gopher.hp in gopher.parse-link-input
         call sub-procedure gopher-parse-link
         return
-    end if  
+    end if
 
     if input is equal to "-" then # pageup
-    end if 
+    end if
 
     if input is equal to " " then # pagedown
-        if lines is greater than or equal to window.rows then 
+        if lines is greater than or equal to window.rows then
             return
-        end if 
-    end if 
+        end if
+    end if
 
     store 0 in gopher.link-num
     store 0 in gopher.overflow
@@ -253,16 +253,16 @@ sub-procedure gopher-prompt
     # search prompt
     store input in i # convert to number
     get character at 0 from gopher.links:i in char
-    if char is equal to "7" then 
+    if char is equal to "7" then
         display "Search: "
         accept input
         in gopher.selector join gopher.selector "\t" input
-    end if 
+    end if
 end sub-procedure
 
 
 sub-procedure print-usage
-    display "Usage: gild hostname [port [selector]]" crlf    
+    display "Usage: gild hostname [port [selector]]" crlf
     exit
 end sub-procedure
 
@@ -271,11 +271,11 @@ end sub-procedure
 if argc is equal to 0 then
     call print-usage
 end if
-if argv:0 is equal to "-h" then 
-    call print-usage 
+if argv:0 is equal to "-h" then
+    call print-usage
 end if
 if argv:0 is equal to "--help" then
-    call print-usage 
+    call print-usage
 end if
 
 store argv:0 in gopher.host
@@ -293,7 +293,7 @@ in gopher.history:gopher.hp join "0null\t" gopher.selector "\t" gopher.host "\t"
 # run loop
 call sub-procedure gopher-init
 while 1 is greater than 0 do
-    call sub-procedure gopher-get  
+    call sub-procedure gopher-get
     call sub-procedure gopher-print
     call sub-procedure gopher-prompt
 repeat

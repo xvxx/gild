@@ -20,7 +20,7 @@ void GOPHER_INIT()
     set_term_size();
 }
 
-void GOPHER_GET() 
+void GOPHER_GET()
 {
     string cache_key = GOPHER_HOST+":"+to_string(GOPHER_PORT)+GOPHER_SELECTOR;
     if(response_cache.find(cache_key)!=response_cache.end())
@@ -43,12 +43,12 @@ void error(const string & msg)
     exit(1);
 }
 
-void signal_handler(int sig) 
+void signal_handler(int sig)
 {
     if (sig == SIGWINCH) set_term_size();
 }
 
-void set_term_size() 
+void set_term_size()
 {
     struct winsize w;
     ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
@@ -80,7 +80,7 @@ int connect_to(string & hostname, int port)
     return sock;
 }
 
-string fetch(int sock, string & selector) 
+string fetch(int sock, string & selector)
 {
     string request = "";
     if (!selector.empty()) request = selector;
