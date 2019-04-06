@@ -85,7 +85,7 @@ sub-procedure gopher-print
     store "" in line
     store "" in buf
     store "" in out
-    store 1 in lines
+    store 0 in lines
 
     store gopher.overflow in index
 
