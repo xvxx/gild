@@ -31,7 +31,14 @@ Usage
 Install
 ~~~~~~~
 
-*-*-* Mac & Linux Binaries Coming Soon *-*-*
+Linux and Mac binaries can be downloaded from:
+
+    https://github.com/dvkt/gild/releases
+
+Just unzip/untar the `gild` binary into your `$PATH` get going!
+
+Building Source
+~~~~~~~~~~~~~~~
 
 1. Install the LDPL programming language: https://ldpl.lartu.net/
 
