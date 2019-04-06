@@ -37,7 +37,7 @@ Install
 
 (NOTE: Install the `extensions` branch from github.com/dvkt/ldpl)
 
-2. With `ldpl` in your path, build GILD:
+2. With `ldpl` in your path, clone this repo then build it:
 
     $ make build
 
