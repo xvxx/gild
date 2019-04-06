@@ -96,7 +96,7 @@ sub-procedure gopher-print
     if tabs is less than 4 then 
         get character at index from gopher.response in char
         while char is not equal to "" do
-            if lines is greater than or equal to window.rows then 
+            if lines is greater than window.rows then 
                 store index in gopher.overflow
                 break 
             end if 
