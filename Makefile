@@ -1,4 +1,5 @@
 default: run
+.PHONY: run build rebuild clean
 
 gild.a: gild.o
 	ar -cvq gild.a gild.o
@@ -10,6 +11,9 @@ gild: gild.a gild.lsc
 	ldpl -i=gild.h -o=gild gild.lsc
 
 build: gild
+
+rebuild: clean
+	make build
 
 run: build
 	./gild localhost 6969
