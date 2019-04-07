@@ -18,6 +18,7 @@ gopher.hp is number # history pointer
 gopher.parse-link-input is text
 gopher.overflow is number
 gopher.link-num is number
+gopher.type is text 
 
 # generic locals
 index is number
@@ -51,32 +52,7 @@ store 1 in linktypes:"0" # file
 store 1 in linktypes:"1" # dir
 store 1 in linktypes:"7" # search
 
-sub-procedure count-tabs-in-response
-    store 0 in i
-    store 0 in tabs
-    store "" in char
-    get character at i from gopher.response in char
-    while char is not equal to "" do
-        if char is equal to "\t" then
-            add 1 and tabs in tabs
-        end if
-
-        if char is equal to "\n" then
-            add 1 and lines in lines
-        end if
-
-        if tabs is greater than or equal to 4 then
-            return
-        end if
-
-        add 1 and i in i
-        get character at i from gopher.response in char
-
-        if lines is equal to 3 then  # no tabs in 3 lines, not a menu
-            return
-        end if
-    repeat
-end sub-procedure
+store "1" in gopher.type 
 
 # prints the content of gopher.response to the screen
 sub-procedure gopher-print
@@ -89,11 +65,8 @@ sub-procedure gopher-print
 
     store gopher.overflow in index
 
-    # assume it's a regular file if there are fewer than 4 \t chars
-    # in the gopher.response
-    store 0 in tabs
-    call count-tabs-in-response
-    if tabs is less than 4 then
+    # regular file
+    if gopher.type is equal to "0" then
         get character at index from gopher.response in char
         while char is not equal to "" do
             if lines is greater than window.rows then
@@ -179,6 +152,8 @@ sub-procedure gopher-parse-link
         store gopher.parse-link-input in gopher.history:gopher.hp
     end if
 
+    get character at 0 from gopher.parse-link-input in gopher.type
+
     while i is less than len do
         get character at i from gopher.parse-link-input in char
         add 1 and i in i
@@ -260,7 +235,6 @@ sub-procedure gopher-prompt
     end if
 end sub-procedure
 
-
 sub-procedure print-usage
     display "Usage: gild hostname [port [selector]]" crlf
     exit
@@ -288,7 +262,7 @@ end if
 
 # store initial site in history
 add 1 and gopher.hp in gopher.hp
-in gopher.history:gopher.hp join "0null\t" gopher.selector "\t" gopher.host "\t" gopher.port
+in gopher.history:gopher.hp join "1null\t" gopher.selector "\t" gopher.host "\t" gopher.port
 
 # run loop
 call sub-procedure gopher-init
