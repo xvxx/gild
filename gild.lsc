@@ -56,6 +56,7 @@ store "1" in gopher.type
 
 # prints the content of gopher.response to the screen
 sub-procedure gopher-print
+    display "\e[2J\e[H" # clear screen
     store 0 in index
     store "" in char
     store "" in line
@@ -94,6 +95,8 @@ sub-procedure gopher-print
         if char is equal to "\r" then
             add 1 and index in index
             get character at index from gopher.response in char
+        end if 
+        
             if char is equal to "\n" then
                 add 1 and lines in lines
                 get character at 0 from line in char
@@ -128,7 +131,6 @@ sub-procedure gopher-print
                 repeat
                 in out join out buf crlf
                 store "" in line
-            end if
         else
             join line and char in line
         end if
