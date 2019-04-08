@@ -3,13 +3,13 @@
 
 DATA:
 
-# variables defined in gild.h
-# - window.rows is number
-# - window.cols is number
-# - gopher.host is text
-# - gopher.port is number
-# - gopher.selector is text
-# - gopher.response is text
+# variables used by GILD
+window.rows is number
+window.cols is number
+gopher.host is text
+gopher.port is number
+gopher.selector is text
+gopher.response is text
 
 # page navigation
 gopher.links is text vector
@@ -267,9 +267,9 @@ add 1 and gopher.hp in gopher.hp
 in gopher.history:gopher.hp join "1null\t" gopher.selector "\t" gopher.host "\t" gopher.port
 
 # run loop
-call sub-procedure gopher-init
+call external gopher-init
 while 1 is greater than 0 do
-    call sub-procedure gopher-get
+    call external gopher-get
     call sub-procedure gopher-print
     call sub-procedure gopher-prompt
 repeat

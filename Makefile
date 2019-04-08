@@ -1,14 +1,8 @@
 default: run
 .PHONY: run build rebuild clean
 
-gild.a: gild.o
-	ar -cvq gild.a gild.o
-
-gild.o: gild.cpp gild.h
-	c++ -c gild.cpp -std=gnu++11 -o gild.o
-
-gild: gild.a gild.lsc
-	ldpl -i=gild.h -o=gild gild.lsc
+gild: gild.ldpl gild.cpp
+	ldpl -i=gild.cpp -o=gild gild.ldpl
 
 build: gild
 
