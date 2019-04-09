@@ -4,12 +4,12 @@
 DATA:
 
 # variables used by GILD
-window.rows is number
-window.cols is number
-gopher.host is text
-gopher.port is number
-gopher.selector is text
-gopher.response is text
+window.rows is external number
+window.cols is external number
+gopher.host is external text
+gopher.port is external number
+gopher.selector is external text
+gopher.response is external text
 
 # page navigation
 gopher.links is text vector
