@@ -9,8 +9,8 @@
                               * * *
 
 GILD is a gopher client for the terminal written in LDPL, a language
-for programmers. This client is a big hack that requires dvkt's  
-experimental fork of LDPL. For now. Consider it a work in progress.
+for programmers. This client requires the latest version of LDPL built
+from master. 
 
 Screencast
 ~~~~~~~~~~
@@ -40,9 +40,12 @@ Just unzip/untar the `gild` binary into your `$PATH` get going!
 Building Source
 ~~~~~~~~~~~~~~~
 
-1. Install the LDPL programming language: https://ldpl.lartu.net/
+1. Install the LDPL programming language and build from master.
 
-(NOTE: Install the `extensions` branch from github.com/dvkt/ldpl)
+    $ git clone https://github.com/lartu/ldpl
+    $ cd ldpl/src 
+    $ make 
+    # cp ldpl to /usr/local/bin or something in your $PATH
 
 2. With `ldpl` in your path, clone this repo then build it:
 
