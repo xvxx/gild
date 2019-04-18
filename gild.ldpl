@@ -3,7 +3,7 @@
 
 DATA:
 
-# variables used by GILD
+# externals defined in gild.cpp
 window.rows is external number
 window.cols is external number
 gopher.host is external text
@@ -188,7 +188,9 @@ sub-procedure gopher-prompt
     end if
     if lines is greater than or equal to window.rows then
         display "SPACE for more, - to go up, "
-    end if
+    else if gopher.overflow is greater than 0 then 
+        display "- to go up, "
+    end if 
     display "Ctrl-C to quit"
     display "\e[36m]: \e[0m"
     accept input
