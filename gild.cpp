@@ -69,7 +69,7 @@ void set_term_size()
 {
     struct winsize w;
     ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
-    WINDOW_ROWS = (ldpl_number)w.ws_row;
+    WINDOW_ROWS = (ldpl_number)w.ws_row - 1; // account for prompt
     WINDOW_COLS = (ldpl_number)w.ws_col;
 }
 
