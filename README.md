@@ -1,6 +1,12 @@
 <p align="center"><img src="gild.png"/></p>
 
-**G**opher **i**n **LD**LP. Gild is a gopher client for the terminal written in LDPL, a language for programmers. 
+<p align="center">
+    <b>G</b>opher <b>I</b>n <b>LD</b>PL
+    <br>
+    GILD is a gopher client for the terminal written in LDPL, a language for programmers. 
+</p>
+
+
 
 **Features:**
 
