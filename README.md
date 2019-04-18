@@ -1,13 +1,15 @@
-![GILD Logo](gild.png)
+<p align="center"><img src="gild.png"/></p>
 
 GILD is a gopher client for the terminal written in LDPL, a language
 for programmers.
 
-![ss1](https://user-images.githubusercontent.com/41523880/56380327-c3ecb680-61c6-11e9-9e6d-6d797b39a7c1.jpeg)
+<p align="center"><img src="https://user-images.githubusercontent.com/41523880/56380327-c3ecb680-61c6-11e9-9e6d-6d797b39a7c1.jpeg"/></p>
 
 ## ~ Screencast ~
 
-[![asciicast](https://asciinema.org/a/p0Ywy6fQBXRZm7sQU4OC5HeJK.svg)](https://asciinema.org/a/p0Ywy6fQBXRZm7sQU4OC5HeJK)
+<p align="center">
+<a href="https://asciinema.org/a/p0Ywy6fQBXRZm7sQU4OC5HeJK" target="_blank"><img src="https://asciinema.org/a/p0Ywy6fQBXRZm7sQU4OC5HeJK.svg" /></a>
+</p>
 
 ## ~ Usage ~
 
@@ -46,13 +48,13 @@ $ make
 
 ## ~ TODO ~
 
-[✓] Connect to server and print response
-[✓] Display dir contents in technicolor
-[✓] Prompt-based navigation (show link #s and ask what to do)
-[✓] 0 to go back
-[✓] Render one page at a time
-[✓] Pipe file contents to less (or just use the same infra as menus)
-[✓] Search
+- [✓] Connect to server and print response
+- [✓] Display dir contents in technicolor
+- [✓] Prompt-based navigation (show link #s and ask what to do)
+- [✓] 0 to go back
+- [✓] Render one page at a time
+- [✓] Pipe file contents to less (or just use the same infra as menus)
+- [✓] Search
 
 ## ~ 🐭 ~
 
