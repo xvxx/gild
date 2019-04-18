@@ -28,9 +28,11 @@ GILD is a gopher client for the terminal written in LDPL, a language for program
 
 ## ~ Install ~
 
-Linux and Mac binaries can be downloaded from:
+Linux and Mac binaries can be downloaded from https://github.com/dvkt/gild/releases 
 
-    https://github.com/dvkt/gild/releases
+- [MacOS](https://github.com/dvkt/gild/releases/download/v0.2.0/gild-macos.tar.gz)
+- [Linux x86-64](https://github.com/dvkt/gild/releases/download/v0.2.0/gild-linux-x86-64.tar.gz)
+- [Linux ARM](https://github.com/dvkt/gild/releases/download/v0.2.0/gild-linux-arm.tar.gz)
 
 Just unzip/untar the `gild` binary into your `$PATH` get going!
 
