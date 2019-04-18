@@ -2,11 +2,9 @@
 
 <p align="center">
     <b>G</b>opher <b>I</b>n <b>LD</b>PL
-    <br>
-    GILD is a gopher client for the terminal written in LDPL, a language for programmers. 
 </p>
 
-
+GILD is a gopher client for the terminal written in LDPL, a language for programmers. 
 
 **Features:**
 
