@@ -1,11 +1,4 @@
-              * * *
-     _____ _____ _    ______ 
-    |  __ \_   _| |   |  _  \
-    | |  \/ | | | |   | | | |
-    | | __  | | | |   | | | |
-    | |_\ \_| |_| |___| |/ / 
-     \____/\___/\_____/___/  
-              * * *
+![GILD Logo](gild.png)
 
 GILD is a gopher client for the terminal written in LDPL, a language
 for programmers. 
