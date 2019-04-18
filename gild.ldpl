@@ -19,6 +19,7 @@ gopher.parse-link-input is text
 gopher.overflow is number
 gopher.link-num is number
 gopher.type is text 
+gopher.status is text 
 
 # generic locals
 index is number
@@ -35,6 +36,7 @@ tabs is number
 # dictionaries
 colormap is text vector
 linktypes is number vector
+help-cmd is number vector
 
 
 PROCEDURE:
@@ -51,6 +53,11 @@ store "\e[35m" in colormap:"L" # link
 store 1 in linktypes:"0" # file
 store 1 in linktypes:"1" # dir
 store 1 in linktypes:"7" # search
+
+store 1 in help-cmd:"h"
+store 1 in help-cmd:"help"
+store 1 in help-cmd:"?"
+store 1 in help-cmd:"#"
 
 store "1" in gopher.type 
 
@@ -180,24 +187,34 @@ end sub-procedure
 # uses gopher.links and gopher.history for navigation
 sub-procedure gopher-prompt
     display "\e[36;1m[\e[37m"
-    if gopher.link-num is greater than 0 then
-        display "# to open, "
-    end if
-    if gopher.hp is greater than 1 then
-        display "0 to go back, "
-    end if
-    if lines is greater than or equal to window.rows then
-        display "SPACE for more, - to go up, "
-    else if gopher.overflow is greater than 0 then 
-        display "- to go up, "
+    if gopher.status is equal to "" then 
+        if gopher.link-num is greater than 0 then
+            display "# to open, "
+        end if
+        if gopher.hp is greater than 1 then
+            display "0 to go back, "
+        end if
+        if lines is greater than or equal to window.rows then
+            display "SPACE for more, - to go up, "
+        else if gopher.overflow is greater than 0 then 
+            display "- to go up, "
+        end if 
+        display "Ctrl-C to quit"
+    else
+        display "\e[31m"
+        display gopher.status 
+        store "" in gopher.status
     end if 
-    display "Ctrl-C to quit"
     display "\e[36m]: \e[0m"
     accept input
 
     if input is equal to "q" then # quit
         exit
     end if
+
+    if help-cmd:input is equal to 1 then # explain 
+        store "Navigate using the numbers next to links" in gopher.status
+    end if 
 
     if input is equal to "0" then # back in history
         store 0 in gopher.link-num
