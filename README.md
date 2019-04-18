@@ -1,18 +1,18 @@
-![GILD Logo](gild.png)
+![GILD Logo](logo.png)
 
 GILD is a gopher client for the terminal written in LDPL, a language
-for programmers. 
+for programmers.
 
 ![ss1](https://user-images.githubusercontent.com/41523880/56380327-c3ecb680-61c6-11e9-9e6d-6d797b39a7c1.jpeg)
 
 ## ~ Screencast ~
 
 [![asciicast](https://asciinema.org/a/p0Ywy6fQBXRZm7sQU4OC5HeJK.svg)](https://asciinema.org/a/p0Ywy6fQBXRZm7sQU4OC5HeJK)
-                    
+
 ## ~ Usage ~
 
     Usage: gild hostname [port [selector]]
-    
+
     $ gild gopher.black
     $ gild sdf.org 70
     $ gild hngopher.com 70 /live/p1/
@@ -46,10 +46,10 @@ $ make
 
 ## ~ TODO ~
 
-[✓] Connect to server and print response 
+[✓] Connect to server and print response
 [✓] Display dir contents in technicolor
 [✓] Prompt-based navigation (show link #s and ask what to do)
-[✓] 0 to go back 
+[✓] 0 to go back
 [✓] Render one page at a time
 [✓] Pipe file contents to less (or just use the same infra as menus)
 [✓] Search
@@ -61,4 +61,4 @@ $ make
     (      ' ' )
     \ (  \_Y_/\
     ""\ \___//
-        `w   "    -nathaN 
+        `w   "    -nathaN
