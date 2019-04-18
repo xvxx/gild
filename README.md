@@ -8,10 +8,6 @@
 - Quick, no-nonsense prompt-based navigation.
 - Supports menus, files, and searches. 
 
-## ~ Picture ~
-
-<p align="center"><img src="https://user-images.githubusercontent.com/41523880/56380327-c3ecb680-61c6-11e9-9e6d-6d797b39a7c1.jpeg"/></p>
-
 ## ~ Screencast ~
 
 <p align="center">
