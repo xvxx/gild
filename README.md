@@ -1,4 +1,4 @@
-![GILD Logo](logo.png)
+![GILD Logo](gild.png)
 
 GILD is a gopher client for the terminal written in LDPL, a language
 for programmers.
