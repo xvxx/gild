@@ -96,41 +96,41 @@ sub-procedure gopher-print
             add 1 and index in index
             get character at index from gopher.response in char
         end if 
-        
-            if char is equal to "\n" then
-                add 1 and lines in lines
-                get character at 0 from line in char
-                if linktypes:char is equal to 1 then
-                    in out join out colormap:"L" "   "
-                        add 1 and gopher.link-num in gopher.link-num
-                    if gopher.link-num is less than 10 then
-                        in out join out "0" gopher.link-num
-                    else
-                        in out join out gopher.link-num
-                    end if
-                    in out join out ". "
-                    store line in gopher.links:gopher.link-num
+    
+        if char is equal to "\n" then
+            add 1 and lines in lines
+            get character at 0 from line in char
+            if linktypes:char is equal to 1 then
+                in out join out colormap:"L" "   "
+                    add 1 and gopher.link-num in gopher.link-num
+                if gopher.link-num is less than 10 then
+                    in out join out "0" gopher.link-num
                 else
-                    in out join out "       "
+                    in out join out gopher.link-num
                 end if
-                store colormap:char in char
-                if char is equal to "" then
-                    store colormap:0 in char
+                in out join out ". "
+                store line in gopher.links:gopher.link-num
+            else
+                in out join out "       "
+            end if
+            store colormap:char in char
+            if char is equal to "" then
+                store colormap:0 in char
+            end if
+            in out join out char
+            store 1 in i
+            store length of line in len
+            store "" in buf
+            while i is less than len do
+                get character at i from line in char
+                if char is equal to "\t" then
+                    break
                 end if
-                in out join out char
-                store 1 in i
-                store length of line in len
-                store "" in buf
-                while i is less than len do
-                    get character at i from line in char
-                    if char is equal to "\t" then
-                        break
-                    end if
-                    join buf and char in buf
-                    add 1 and i in i
-                repeat
-                in out join out buf crlf
-                store "" in line
+                join buf and char in buf
+                add 1 and i in i
+            repeat
+            in out join out buf crlf
+            store "" in line
         else
             join line and char in line
         end if
