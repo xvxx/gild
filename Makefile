@@ -1,4 +1,4 @@
-default: run
+default: build
 .PHONY: run build rebuild clean
 
 gild: gild.ldpl gild.cpp
