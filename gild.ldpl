@@ -38,6 +38,9 @@ colormap is text vector
 linktypes is number vector
 help-cmd is number vector
 
+# cache
+cache is text map
+cache.key is text 
 
 PROCEDURE:
 
@@ -60,6 +63,20 @@ store 1 in help-cmd:"?"
 store 1 in help-cmd:"#"
 
 store "1" in gopher.type 
+
+# makes the gopher request 
+sub-procedure gopher-get
+    in cache.key join GOPHER.HOST ":" GOPHER.PORT GOPHER.SELECTOR
+    store cache:cache.key in gopher.response
+    if gopher.response is not equal to "" then 
+        return
+    end if
+
+    join GOPHER.SELECTOR and crlf in GOPHER.SELECTOR
+    send GOPHER.SELECTOR to GOPHER.HOST at GOPHER.PORT in GOPHER.RESPONSE
+    
+    store gopher.response in cache:cache.key
+end sub-procedure
 
 # prints the content of gopher.response to the screen
 sub-procedure gopher-print
@@ -288,7 +305,7 @@ in gopher.history:gopher.hp join "1null\t" gopher.selector "\t" gopher.host "\t"
 # run loop
 call external gopher-init
 while 1 is greater than 0 do
-    call external gopher-get
+    call sub-procedure gopher-get
     call sub-procedure gopher-print
     call sub-procedure gopher-prompt
 repeat
