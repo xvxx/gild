@@ -1,0 +1,40 @@
+# ldpl 4.3 compat
+
+PROCEDURE:
+
+sub ldpl.add
+parameters:
+    a is number
+    b is number
+    c is number
+procedure:
+    in c solve a + b
+end sub
+create statement "add $ and $ in $" executing ldpl.add
+
+sub ldpl.subtract
+parameters:
+    a is number
+    b is number
+    c is number
+procedure:
+    in c solve b - a
+end sub
+create statement "subtract $ from $ in $" executing ldpl.subtract
+
+sub ldpl.get-char-or-empty-at-index
+parameters:
+    index is number
+    string is text
+    var is text
+local data:
+    count is number
+procedure:
+    get length of string in count
+    if index is greater than or equal to count then 
+        store "" in var
+    else 
+        get character at index from string in var
+    end if 
+end sub
+create statement "get char or empty at $ from $ in $" executing ldpl.get-char-or-empty-at-index
