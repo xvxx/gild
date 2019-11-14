@@ -1,7 +1,7 @@
 default: build
 .PHONY: run build rebuild clean
 
-gild: gild.ldpl
+gild: gild.ldpl ldpl_socket
 	ldpl -o=gild gild.ldpl
 
 build: gild
@@ -14,6 +14,11 @@ run: build
 
 clean:
 	rm -f gild gild-bin gild.{a,o}
+
+ldpl_socket:
+	git clone https://github.com/dvkt/ldpl-socket
+	mv ldpl-socket/ldpl_socket .
+	rm -rf ldpl-socket
 
 ## Release process
 
