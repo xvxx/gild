@@ -1,6 +1,7 @@
 ##
 # GILD: Gopher in LDPL
 
+include "compat43.ldpl"
 DATA:
 
 # externals defined in gild.cpp
@@ -12,8 +13,8 @@ gopher.selector is external text
 gopher.response is external text
 
 # page navigation
-gopher.links is text vector
-gopher.history is text vector
+gopher.links is text map
+gopher.history is text map
 gopher.hp is number # history pointer
 gopher.parse-link-input is text
 gopher.overflow is number
@@ -37,10 +38,9 @@ out is text
 tabs is number
 
 # dictionaries
-colormap is text vector
-linktypes is number vector
-help-cmd is number vector
-
+colormap is text map
+linktypes is number map
+help-cmd is number map
 
 PROCEDURE:
 
@@ -78,7 +78,7 @@ sub-procedure gopher-print
 
     # regular file
     if gopher.type is equal to "0" then
-        get character at index from gopher.response in char
+        get char or empty at index from gopher.response in char
         while char is not equal to "" do
             if lines is greater than window.rows then
                 store index in gopher.overflow
@@ -89,13 +89,13 @@ sub-procedure gopher-print
             end if
             in out join out char
             add 1 and index in index
-            get character at index from gopher.response in char
+            get char or empty at index from gopher.response in char
         repeat
         display out crlf
         return
     end if
 
-    get character at index from gopher.response in char
+    get char or empty at index from gopher.response in char
     while char is not equal to "" do
         if lines is greater than or equal to window.rows then
             store index in gopher.overflow
@@ -104,12 +104,12 @@ sub-procedure gopher-print
 
         if char is equal to "\r" then
             add 1 and index in index
-            get character at index from gopher.response in char
+            get char or empty at index from gopher.response in char
         end if 
     
         if char is equal to "\n" then
             add 1 and lines in lines
-            get character at 0 from line in char
+            get char or empty at 0 from line in char
             if linktypes:char is equal to 1 then
                 in out join out colormap:"L" "   "
                     add 1 and gopher.link-num in gopher.link-num
@@ -129,10 +129,10 @@ sub-procedure gopher-print
             end if
             in out join out char
             store 1 in i
-            store length of line in len
+            get length of line in len
             store "" in buf
             while i is less than len do
-                get character at i from line in char
+                get char or empty at i from line in char
                 if char is equal to "\t" then
                     break
                 end if
@@ -145,7 +145,7 @@ sub-procedure gopher-print
             join line and char in line
         end if
         add 1 and index in index
-        get character at index from gopher.response in char
+        get char or empty at index from gopher.response in char
     repeat
     display out
 end sub-procedure
@@ -157,17 +157,17 @@ sub-procedure gopher-parse-link
     store 1 in i
     store 0 in tabs
     store "" in buf
-    store length of gopher.parse-link-input in len
+    get length of gopher.parse-link-input in len
 
     if gopher.parse-link-input is not equal to gopher.history:gopher.hp then
         add 1 and gopher.hp in gopher.hp
         store gopher.parse-link-input in gopher.history:gopher.hp
     end if
 
-    get character at 0 from gopher.parse-link-input in gopher.type
+    get char or empty at 0 from gopher.parse-link-input in gopher.type
 
     while i is less than len do
-        get character at i from gopher.parse-link-input in char
+        get char or empty at i from gopher.parse-link-input in char
         add 1 and i in i
         if char is equal to "\t" then
             add 1 and tabs in tabs
@@ -251,7 +251,7 @@ sub-procedure gopher-prompt
 
     # search prompt
     store input in i # convert to number
-    get character at 0 from gopher.links:i in char
+    get char or empty at 0 from gopher.links:i in char
     if char is equal to "7" then
         display "Search: "
         accept input
