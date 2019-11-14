@@ -146,7 +146,7 @@ sub-procedure gopher-print
                 in out join out colormap:"L" "   "
                     add 1 and gopher.link-num in gopher.link-num
                 if gopher.link-num is less than 10 then
-                    in out join out "0" gopher.link-num
+                    in out join out " " gopher.link-num
                 else
                     in out join out gopher.link-num
                 end if
