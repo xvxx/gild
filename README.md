@@ -42,13 +42,14 @@ Gild requires **LDPL 4.3**.
 
 1. With `ldpl` in your path, clone this repo and build it:
 
-    git clone https://github.com/dvkt/gild
-    cd gild
-    make build
+        git clone https://github.com/dvkt/gild
+        cd gild
+        make build
 
 3. Now visit your favorite gopher servers!
 
-    ./gild bitreich.org
+        ./gild bitreich.org
+
 
 ## ~ 🐭 ~
 
