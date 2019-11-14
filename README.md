@@ -38,32 +38,17 @@ Just unzip/untar the `gild` binary into your `$PATH` get going!
 
 ## ~ Building Source ~
 
-1. Install the LDPL programming language and build from master.
+Gild requires **LDPL 4.3**.
 
-```
-$ git clone https://github.com/lartu/ldpl
-$ cd ldpl/src
-$ make
-# cp ldpl to /usr/local/bin or something in your $PATH
-```
+1. With `ldpl` in your path, clone this repo and build it:
 
-2. With `ldpl` in your path, clone this repo then build it:
-
-    $ make build
+    git clone https://github.com/dvkt/gild
+    cd gild
+    make build
 
 3. Now visit your favorite gopher servers!
 
-    $ ./gild bitreich.org
-
-## ~ TODO ~
-
-- [✓] Connect to server and print response
-- [✓] Display dir contents in technicolor
-- [✓] Prompt-based navigation (show link #s and ask what to do)
-- [✓] 0 to go back
-- [✓] Render one page at a time
-- [✓] Pipe file contents to less (or just use the same infra as menus)
-- [✓] Search
+    ./gild bitreich.org
 
 ## ~ 🐭 ~
 
