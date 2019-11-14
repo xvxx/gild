@@ -1,3 +1,6 @@
+LDPL_SOCKET_REPO=https://github.com/dvkt/ldpl-socket
+LDPL_SOCKET_VERSION=99a9f27
+
 default: build
 .PHONY: run build rebuild clean
 
@@ -14,9 +17,11 @@ run: build
 
 clean:
 	rm -f gild gild-bin gild.{a,o}
+	rm -rf ldpl_socket ldpl-socket
 
 ldpl_socket:
-	git clone https://github.com/dvkt/ldpl-socket
+	git clone $(LDPL_SOCKET_REPO)
+	cd ldpl-socket && git checkout $(LDPL_SOCKET_VERSION) 2> /dev/null
 	mv ldpl-socket/ldpl_socket .
 	rm -rf ldpl-socket
 
