@@ -1,8 +1,8 @@
 default: build
 .PHONY: run build rebuild clean
 
-gild: gild.ldpl gild.cpp
-	ldpl -i=gild.cpp -o=gild gild.ldpl
+gild: gild.ldpl
+	ldpl -o=gild gild.ldpl
 
 build: gild
 
