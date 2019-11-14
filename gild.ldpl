@@ -1,16 +1,20 @@
 ##
 # GILD: Gopher in LDPL
 
+include "ldpl_socket/ldpl_socket.ldpl"
 include "compat43.ldpl"
+extension "gild.cpp"
+
 DATA:
 
 # externals defined in gild.cpp
 window.rows is external number
 window.cols is external number
-gopher.host is external text
-gopher.port is external number
-gopher.selector is external text
-gopher.response is external text
+gopher.host is text
+gopher.port is number
+gopher.selector is text
+gopher.response is text
+gopher.socket is number
 
 # page navigation
 gopher.links is text map
@@ -63,6 +67,23 @@ store 1 in help-cmd:"?"
 store 1 in help-cmd:"#"
 
 store "1" in gopher.type 
+
+# gets gopher response
+sub-procedure gopher-get
+LOCAL DATA:
+    res is text
+PROCEDURE:
+    store "" in gopher.response
+    join gopher.selector and crlf in gopher.selector
+    socket connect to gopher.host at gopher.port in gopher.socket
+    socket send gopher.selector to gopher.socket 
+    socket read from gopher.socket in res
+    while res is not equal to "" do
+        in gopher.response join gopher.response res
+        socket read from gopher.socket in res
+    repeat    
+    # display gopher.response crlf
+end sub-procedure
 
 # prints the content of gopher.response to the screen
 sub-procedure gopher-print
@@ -298,7 +319,7 @@ in gopher.history:gopher.hp join "1null\t" gopher.selector "\t" gopher.host "\t"
 # run loop
 call external gopher-init
 while 1 is greater than 0 do
-    call external gopher-get
+    call sub-procedure gopher-get
     call sub-procedure gopher-print
     call sub-procedure gopher-prompt
 repeat
