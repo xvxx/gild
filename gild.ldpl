@@ -46,6 +46,10 @@ colormap is text map
 linktypes is number map
 help-cmd is number map
 
+# cache
+cache is text map
+cache.key is text 
+
 PROCEDURE:
 
 store "\e[32m" in colormap:"0" # file
@@ -73,6 +77,12 @@ sub-procedure gopher-get
 LOCAL DATA:
     res is text
 PROCEDURE:
+    in cache.key join gopher.host ":" gopher.port gopher.selector
+    store cache:cache.key in gopher.response
+    if gopher.response is not equal to "" then 
+        return
+    end if
+
     store "" in gopher.response
     join gopher.selector and crlf in gopher.selector
     socket connect to gopher.host at gopher.port in gopher.socket
@@ -82,7 +92,8 @@ PROCEDURE:
         in gopher.response join gopher.response res
         socket read from gopher.socket in res
     repeat    
-    # display gopher.response crlf
+        
+    store gopher.response in cache:cache.key
 end sub-procedure
 
 # prints the content of gopher.response to the screen
