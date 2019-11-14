@@ -21,6 +21,9 @@ gopher.link-num is number
 gopher.type is text 
 gopher.status is text 
 
+# arg
+argc is number
+
 # generic locals
 index is number
 input is text
@@ -263,21 +266,28 @@ end sub-procedure
 
 # MAIN:
 
+get length of argv in argc
 if argc is equal to 0 then
     call print-usage
 end if
-if argv:0 is equal to "-h" then
+if argc is greater than 0 and argv:0 is equal to "-h" then
     call print-usage
 end if
-if argv:0 is equal to "--help" then
+if argc is greater than 0 and argv:0 is equal to "--help" then
     call print-usage
 end if
 
-store argv:0 in gopher.host
-store argv:1 in gopher.port
-store argv:2 in gopher.selector
+if argc is greater than 0 then
+    store argv:0 in gopher.host
+end if
+if argc is greater than 1 then
+    store argv:1 in gopher.port
+end if
+if argc is greater than 2 then
+    store argv:2 in gopher.selector
+end if 
 
-if argv:1 is equal to "" then
+if gopher.port is equal to 0 then
     store 70 in gopher.port
 end if
 
