@@ -1,5 +1,6 @@
 LDPL_SOCKET_REPO=https://github.com/dvkt/ldpl-socket
 LDPL_SOCKET_VERSION=v0.1.0
+LDPL_VERSION=4.4
 
 default: build
 .PHONY: run build rebuild clean
@@ -37,11 +38,16 @@ LINUX_x64_SERVER="ubuntu"
 LINUX_ARM_SERVER="ubuntu-arm"
 
 release:
-	rm -f dist/*
+	rm -rf dist
+	mkdir dist
 
+	ssh $(LINUX_x64_SERVER) 'cd ldpl && git fetch origin && git reset --hard origin/master && git checkout $(LDPL_VERSION) && cd src && make'
+	ssh $(LINUX_x64_SERVER) './ldpl/src/ldpl -v | head -n 3'
 	ssh $(LINUX_x64_SERVER) 'cd gild && rm -f gild && git pull origin master && make rebuild && strip gild'
 	scp $(LINUX_x64_SERVER):~/gild/gild  dist/linux-x86-64
 
+	ssh $(LINUX_ARM_SERVER) 'cd ldpl && git fetch origin && git reset --hard origin/master && git checkout $(LDPL_VERSION) && cd src && make'
+	ssh $(LINUX_ARM_SERVER) './ldpl/src/ldpl -v | head -n 3'
 	ssh $(LINUX_ARM_SERVER) 'cd gild && rm -f gild && git pull origin master && make rebuild && strip gild'
 	scp $(LINUX_ARM_SERVER):~/gild/gild  dist/linux-arm
 
