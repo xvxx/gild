@@ -1,5 +1,5 @@
 LDPL_SOCKET_REPO=https://github.com/dvkt/ldpl-socket
-LDPL_SOCKET_VERSION=99a9f27
+LDPL_SOCKET_VERSION=v0.1.0
 
 default: build
 .PHONY: run build rebuild clean
