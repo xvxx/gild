@@ -4,7 +4,8 @@
     <b>G</b>opher <b>I</b>n <b>LD</b>PL
 </p>
 
-GILD is a gopher client for the terminal written in LDPL, a language for programmers.
+GILD is a gopher client for the terminal written in LDPL, an easy to
+learn language for programmers of all ages.
 
 **Features:**
 
@@ -14,9 +15,8 @@ GILD is a gopher client for the terminal written in LDPL, a language for program
 
 ## ~ Screencast ~
 
-<p align="center">
-<a href="https://asciinema.org/a/p0Ywy6fQBXRZm7sQU4OC5HeJK" target="_blank"><img src="https://asciinema.org/a/p0Ywy6fQBXRZm7sQU4OC5HeJK.svg" /></a>
-</p>
+<p align="center"><a href="https://bit.ly/2MLVOmR" target="_blank">
+<img src="https://bit.ly/2sBmTlM" /></a></p>
 
 ## ~ Usage ~
 
@@ -28,11 +28,12 @@ GILD is a gopher client for the terminal written in LDPL, a language for program
 
 ## ~ Install ~
 
-Linux and Mac binaries can be downloaded from https://github.com/dvkt/gild/releases
+Linux and Mac binaries can be downloaded from
+https://github.com/dvkt/gild/releases:
 
-- **[gild-macos.zip](https://github.com/dvkt/gild/releases/download/v0.4.0/gild-macos.zip)**
-- **[gild-linux-x86-64.tar.gz](https://github.com/dvkt/gild/releases/download/v0.4.0/gild-linux-x86-64.tar.gz)**
-- **[gild-linux-arm.tar.gz](https://github.com/dvkt/gild/releases/download/v0.4.0/gild-linux-arm.tar.gz)**
+- **[gild-macos.zip][macos]**
+- **[gild-linux-x86-64.tar.gz][x86_64]**
+- **[gild-linux-arm.tar.gz][armv8]**
 
 Just unzip/untar the `gild` binary into your `$PATH` get going!
 
@@ -59,3 +60,7 @@ Building from source requires **LDPL 4.3**.
        \ (  \_Y_/\
         ""\ \___//
            `w   "       -nathaN
+
+[macos]: https://github.com/dvkt/gild/releases/download/v0.4.0/gild-macos.zip
+[x86_64]: https://github.com/dvkt/gild/releases/download/v0.4.0/gild-linux-x86-64.tar.gz
+[armv8]: https://github.com/dvkt/gild/releases/download/v0.4.0/gild-linux-arm.tar.gz
