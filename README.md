@@ -29,7 +29,7 @@ learn language for programmers of all ages.
 ## ~ Install ~
 
 Linux and Mac binaries can be downloaded from
-https://github.com/dvkt/gild/releases:
+https://github.com/xvxx/gild/releases:
 
 - **[gild-macos.zip][macos]**
 - **[gild-linux-x86-64.tar.gz][x86_64]**
@@ -43,7 +43,7 @@ Building from source requires **LDPL 4.3**.
 
 1. With `ldpl` in your path, clone this repo and build it:
 
-        git clone https://github.com/dvkt/gild
+        git clone https://github.com/xvxx/gild
         cd gild
         make build
 
@@ -61,6 +61,6 @@ Building from source requires **LDPL 4.3**.
         ""\ \___//
            `w   "       -nathaN
 
-[macos]: https://github.com/dvkt/gild/releases/download/v0.4.0/gild-macos.zip
-[x86_64]: https://github.com/dvkt/gild/releases/download/v0.4.0/gild-linux-x86-64.tar.gz
-[armv8]: https://github.com/dvkt/gild/releases/download/v0.4.0/gild-linux-arm.tar.gz
+[macos]: https://github.com/xvxx/gild/releases/download/v0.4.0/gild-macos.zip
+[x86_64]: https://github.com/xvxx/gild/releases/download/v0.4.0/gild-linux-x86-64.tar.gz
+[armv8]: https://github.com/xvxx/gild/releases/download/v0.4.0/gild-linux-arm.tar.gz

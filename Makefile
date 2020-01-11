@@ -1,4 +1,4 @@
-LDPL_SOCKET_REPO=https://github.com/dvkt/ldpl-socket
+LDPL_SOCKET_REPO=https://github.com/xvxx/ldpl-socket
 LDPL_SOCKET_VERSION=v0.1.0
 LDPL_VERSION=4.4
 
