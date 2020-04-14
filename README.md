@@ -13,6 +13,9 @@ an easy to learn language for programmers of all ages.
 - Quick, no-nonsense prompt-based navigation.
 - Supports menus, files, and searches.
 
+**NOTE:** If you are looking for a more full-featured Gopher client
+that still has pretty colors, check out [phetch][phetch].
+
 ## ~ Screencast ~
 
 <p align="center"><a href="https://bit.ly/2MLVOmR" target="_blank">
@@ -23,7 +26,8 @@ an easy to learn language for programmers of all ages.
     Usage: gild URL
 
     $ gild gopher.black
-    $ gild hngopher.com/live/p1/
+    $ gild gopher://hngopher.com/live/p1/
+    $ gild gopher://port70.dk/1/motd
 
 ## ~ Install ~
 
@@ -64,3 +68,4 @@ Building from source requires **LDPL 4.3**.
 [x86_64]: https://github.com/xvxx/gild/releases/download/v0.4.0/gild-linux-x86-64.tar.gz
 [armv8]: https://github.com/xvxx/gild/releases/download/v0.4.0/gild-linux-arm.tar.gz
 [ldpl]: https://www.ldpl-lang.org/
+[phetch]: https://github.com/xvxx/phetch
