@@ -10,6 +10,7 @@ DATA:
 # externals defined in gild.cpp
 window.rows is external number
 window.cols is external number
+gopher.url is text
 gopher.host is text
 gopher.port is number
 gopher.selector is text
@@ -23,8 +24,8 @@ gopher.hp is number # history pointer
 gopher.parse-link-input is text
 gopher.overflow is number
 gopher.link-num is number
-gopher.type is text 
-gopher.status is text 
+gopher.type is text
+gopher.status is text
 
 # arg
 argc is number
@@ -40,6 +41,7 @@ len is number
 buf is text
 out is text
 tabs is number
+parts is text list
 
 # dictionaries
 colormap is text map
@@ -48,7 +50,7 @@ help-cmd is number map
 
 # cache
 cache is text map
-cache.key is text 
+cache.key is text
 
 PROCEDURE:
 
@@ -70,7 +72,7 @@ store 1 in help-cmd:"help"
 store 1 in help-cmd:"?"
 store 1 in help-cmd:"#"
 
-store "1" in gopher.type 
+store "1" in gopher.type
 
 # gets gopher response
 sub-procedure gopher-get
@@ -79,7 +81,7 @@ LOCAL DATA:
 PROCEDURE:
     in cache.key join gopher.host ":" gopher.port gopher.selector
     store cache:cache.key in gopher.response
-    if gopher.response is not equal to "" then 
+    if gopher.response is not equal to "" then
         return
     end if
 
@@ -89,7 +91,7 @@ PROCEDURE:
     socket connect to gopher.host at gopher.port in gopher.socket
     call gopher-check-for-errors
 
-    socket send gopher.selector to gopher.socket 
+    socket send gopher.selector to gopher.socket
     call gopher-check-for-errors
 
     socket read from gopher.socket in res
@@ -99,8 +101,8 @@ PROCEDURE:
         in gopher.response join gopher.response res
         socket read from gopher.socket in res
         call gopher-check-for-errors
-    repeat    
-        
+    repeat
+
     store gopher.response in cache:cache.key
 end sub-procedure
 
@@ -145,8 +147,8 @@ sub-procedure gopher-print
         if char is equal to "\r" then
             add 1 and index in index
             get char or empty at index from gopher.response in char
-        end if 
-    
+        end if
+
         if char is equal to "\n" then
             add 1 and lines in lines
             get char or empty at 0 from line in char
@@ -230,7 +232,7 @@ end sub-procedure
 # uses gopher.links and gopher.history for navigation
 sub-procedure gopher-prompt
     display "\e[36;1m[\e[37m"
-    if gopher.status is equal to "" then 
+    if gopher.status is equal to "" then
         if gopher.link-num is greater than 0 then
             display "# to open, "
         end if
@@ -239,15 +241,15 @@ sub-procedure gopher-prompt
         end if
         if lines is greater than or equal to window.rows then
             display "SPACE for more, - to go up, "
-        else if gopher.overflow is greater than 0 then 
+        else if gopher.overflow is greater than 0 then
             display "- to go up, "
-        end if 
+        end if
         display "Ctrl-C to quit"
     else
         display "\e[31m"
-        display gopher.status 
+        display gopher.status
         store "" in gopher.status
-    end if 
+    end if
     display "\e[36m]: \e[0m"
     accept input
 
@@ -255,9 +257,9 @@ sub-procedure gopher-prompt
         exit
     end if
 
-    if help-cmd:input is equal to 1 then # explain 
+    if help-cmd:input is equal to 1 then # explain
         store "Navigate using the numbers next to links" in gopher.status
-    end if 
+    end if
 
     if input is equal to "0" then # back in history
         store 0 in gopher.link-num
@@ -301,11 +303,49 @@ end sub-procedure
 
 # prints error and exits, if one occurred
 sub-procedure gopher-check-for-errors
-    if ErrorCode is less than 0 then 
-        display "ERR: " ErrorText crlf 
+    if ErrorCode is less than 0 then
+        display "ERR: " ErrorText crlf
         exit
     end if
 end sub
+
+# remove leading /1/ or /0/ from gopher selector. we don't support it.
+sub-procedure gopher-clean-selector
+    substring gopher.selector from 0 length 2 in buf
+    get length of gopher.selector in len
+
+    if buf is equal to "/1" or buf is equal to "/0" then
+        substring gopher.selector from 2 length len in gopher.selector
+    end if
+end sub
+
+# splits gopher.url into gopher.host, gopher.port, gopher.selector
+sub-procedure gopher-split-url-into-parts
+    # strip leading "gopher://" from URLs
+    substring gopher.url from 0 length 9 in buf
+    if buf is equal to "gopher://" then
+        get length of gopher.url in len
+        substring gopher.url from 9 length len in gopher.url
+    end if
+
+    get index of "/" from gopher.url in i
+    if i is greater than -1 then
+        get length of gopher.url in len
+        substring gopher.url from 0 length i in gopher.host
+        substring gopher.url from i length len in gopher.selector
+    else
+        store gopher.url in gopher.host
+    end if
+
+    get index of ":" from gopher.host in i
+    if i is greater than -1 then
+        split gopher.host by ":" in parts
+        store parts:0 in gopher.host
+        store parts:1 in gopher.port
+    else
+        store 70 in gopher.port
+    end if
+end sub-procedure
 
 sub-procedure print-usage
     display "Usage: gild hostname [port [selector]]" crlf
@@ -325,7 +365,10 @@ if argc is greater than 0 and argv:0 is equal to "--help" then
     call print-usage
 end if
 
-if argc is greater than 0 then
+if argc is equal to 1 then
+    store argv:0 in gopher.url
+    call gopher-split-url-into-parts
+else if argc is greater than 0 then
     store argv:0 in gopher.host
 end if
 if argc is greater than 1 then
@@ -333,11 +376,14 @@ if argc is greater than 1 then
 end if
 if argc is greater than 2 then
     store argv:2 in gopher.selector
-end if 
+end if
 
 if gopher.port is equal to 0 then
     store 70 in gopher.port
 end if
+
+# strip leading /1 or /0 from selector. we don't support it yet.
+call gopher-clean-selector
 
 # store initial site in history
 add 1 and gopher.hp in gopher.hp
