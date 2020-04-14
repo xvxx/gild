@@ -64,8 +64,8 @@ Building from source requires **LDPL 4.3**.
         ""\ \___//
            `w   "       -nathaN
 
-[macos]: https://github.com/xvxx/gild/releases/download/v0.4.0/gild-macos.zip
-[x86_64]: https://github.com/xvxx/gild/releases/download/v0.4.0/gild-linux-x86-64.tar.gz
-[armv8]: https://github.com/xvxx/gild/releases/download/v0.4.0/gild-linux-arm.tar.gz
+[macos]: https://github.com/xvxx/gild/releases/download/v0.5.0/gild-macos-v0.5.0.zip
+[x86_64]: https://github.com/xvxx/gild/releases/download/v0.5.0/gild-linux-x86-64-v0.5.0.tar.gz
+[armv8]: https://github.com/xvxx/gild/releases/download/v0.5.0/gild-linux-arm-v0.5.0.tar.gz
 [ldpl]: https://www.ldpl-lang.org/
 [phetch]: https://github.com/xvxx/phetch
