@@ -348,7 +348,7 @@ sub-procedure gopher-split-url-into-parts
 end sub-procedure
 
 sub-procedure print-usage
-    display "Usage: gild hostname [port [selector]]" crlf
+    display "Usage: gild [gopher-url]" crlf
     exit
 end sub-procedure
 
