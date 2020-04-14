@@ -4,8 +4,8 @@
     <b>G</b>opher <b>I</b>n <b>LD</b>PL
 </p>
 
-GILD is a gopher client for the terminal written in LDPL, an easy to
-learn language for programmers of all ages.
+GILD is a gopher client for the terminal written in [LDPL][ldpl],
+an easy to learn language for programmers of all ages.
 
 **Features:**
 
@@ -20,11 +20,10 @@ learn language for programmers of all ages.
 
 ## ~ Usage ~
 
-    Usage: gild hostname [port [selector]]
+    Usage: gild URL
 
     $ gild gopher.black
-    $ gild sdf.org 70
-    $ gild hngopher.com 70 /live/p1/
+    $ gild hngopher.com/live/p1/
 
 ## ~ Install ~
 
@@ -43,13 +42,13 @@ Building from source requires **LDPL 4.3**.
 
 1. With `ldpl` in your path, clone this repo and build it:
 
-        git clone https://github.com/xvxx/gild
-        cd gild
-        make build
+    git clone https://github.com/xvxx/gild
+    cd gild
+    make build
 
 3. Now visit your favorite gopher servers!
 
-        ./gild bitreich.org
+    ./gild bitreich.org
 
 
 ## ~ 🐭 ~
@@ -64,3 +63,4 @@ Building from source requires **LDPL 4.3**.
 [macos]: https://github.com/xvxx/gild/releases/download/v0.4.0/gild-macos.zip
 [x86_64]: https://github.com/xvxx/gild/releases/download/v0.4.0/gild-linux-x86-64.tar.gz
 [armv8]: https://github.com/xvxx/gild/releases/download/v0.4.0/gild-linux-arm.tar.gz
+[ldpl]: https://www.ldpl-lang.org/
